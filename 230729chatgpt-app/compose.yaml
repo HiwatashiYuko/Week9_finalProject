@@ -1,0 +1,56 @@
+# monicaちゃん調べ
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyCGdAi5FXel-DTsNGFbvT2Tr-RZowG94cw
+      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: teamb-a39e7.firebaseapp.com
+      NEXT_PUBLIC_FIREBASE_PROJECT_ID: teamb-a39e7
+      # NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: [Stripeのパブリッシャブルキー]
+
+    networks:
+      - app-network
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_HOST: db
+
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: teamb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    networks:
+      - app-network
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+volumes:
+  dbdata:
+
+networks:
+  app-network:
