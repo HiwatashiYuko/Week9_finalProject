@@ -14,7 +14,7 @@ webサーバー：Uvicorn
 
 データベース：MySQL
 
-認証：firebase(Goigle　IDでログインしたい）➝後日反映できるよう、compose.yamlへ記載箇所あり。
+認証：firebase(Google　IDでログインしたい）➝後日反映できるよう、compose.yamlへ記載箇所あり。
 
 決済機能：stripe　➝後日反映できるよう、compose.yamlへ記載箇所あり。
 
