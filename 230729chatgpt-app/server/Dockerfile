@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN pip install --no-cache-dir openai
 
+RUN pip install --no-cache-dir SQLAlchemy
+
 COPY . .
 
 EXPOSE 8000
