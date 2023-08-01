@@ -1,3 +1,11 @@
+/* home.module.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* その他のスタイルを追加 */
+
+
 .main {
   display: flex;
   flex-direction: column;
