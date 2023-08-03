@@ -5,3 +5,10 @@
 
 /* その他のスタイルを追加 */
 
+body{
+  background-image: url('../public/maru53.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+

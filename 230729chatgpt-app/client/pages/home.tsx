@@ -21,7 +21,7 @@ const HomePage = () => {
 
       // APIからほめられるコメントを取得
       const data = await response.json();
-      setPraiseList(prevLisit => [...prevList, {comment,praise: data.praise}]);
+      setPraiseList(prevList => [...prevList, {comment,praise: data.praise}]);
     } catch (error) {
       console.error(error);
     }
