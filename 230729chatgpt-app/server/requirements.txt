@@ -16,3 +16,4 @@ typing_extensions==4.7.1
 urllib3==2.0.4
 uvicorn==0.23.1
 sqlalchemy==1.4.23  # バージョン番号は適宜調整してください
+openai
