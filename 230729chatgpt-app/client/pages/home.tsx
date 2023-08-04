@@ -29,8 +29,8 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <h1>今日のがんばりをほめてもらう！</h1>
+    <div className="text-center">
+      <h1 className="text-4xl">今日のがんばりをほめてもらう！</h1>
       <p>仕事のこと・勉強のこと・家事のこと、がんばったことを思い出してみてください</p>
       <div>
         {praiseList.map(({comment, praise}, index)=> {
