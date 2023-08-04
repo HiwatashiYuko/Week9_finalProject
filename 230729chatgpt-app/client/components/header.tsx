@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header className="flex justify-between">
+    <header className="flex justify-between bg-green-510">
       <div>
         <Link href="/home">ほめてもらう</Link>
       </div>
