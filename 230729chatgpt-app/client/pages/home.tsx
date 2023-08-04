@@ -12,7 +12,7 @@ const HomePage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({ request_data:comment }),
       });
 
       if (!response.ok) {
@@ -21,6 +21,7 @@ const HomePage = () => {
 
       // APIからほめられるコメントを取得
       const data = await response.json();
+      console.log(data); // サーバー側の応答をコンソールログに表示
       setPraiseList(prevList => [...prevList, {comment,praise: data.praise}]);
     } catch (error) {
       console.error(error);
