@@ -21,7 +21,9 @@ const HomePage = () => {
 
       // APIからほめられるコメントを取得
       const data = await response.json();
-      setPraiseList(prevList => [...prevList, {comment,praise: data.praise}]);
+      console.log(data); // サーバー側の応答をコンソールログに表示
+      setPraiseList(prevList => [...prevList, {comment,praise: data.response}]);
+      console.log(praiseList)
     } catch (error) {
       console.error(error);
     }
@@ -29,14 +31,20 @@ const HomePage = () => {
 
   return (
     <div className="text-center">
-      <h1 className="text-4xl">今日のがんばりをほめてもらう！</h1>
+      <h1 className="text-4xl m-6">今日のがんばりをほめてもらう！</h1>
       <p>仕事のこと・勉強のこと・家事のこと、がんばったことを思い出してみてください</p>
       <div>
         {praiseList.map(({comment, praise}, index)=> {
+          return (
             <div key={index}>
-                <p>{comment}</p>
-                <p>{praise}</p>
+              <div className="flex justify-end">
+                <p className="bg-grey-120 text-yellow-520 text-left rounded-xl p-4 w-2/3 mr-36 my-5 opacity-90">{comment}</p>
+              </div>
+              <div className="flex justify-start">
+                <p className="bg-grey-120 text-green-700 text-left rounded-xl p-4 w-2/3 ml-36 my-5 opacity-90">{praise}</p>
+              </div>
             </div>
+          );
         })}
       </div>
       <CommentForm onSubmit={handleSubmitComment} />
