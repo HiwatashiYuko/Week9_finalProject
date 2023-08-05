@@ -6,6 +6,9 @@ const HomePage = () => {
 
   const handleSubmitComment = async (comment: string) => {
     try {
+      // 一時的にコメントを表示
+      setPraiseList(prevList => [...prevList, { comment, praise: '...' }]);
+
       // APIエンドポイントにコメントを送信
       const response = await fetch('http://localhost:8000/chat', {
         method: 'POST',
@@ -22,8 +25,10 @@ const HomePage = () => {
       // APIからほめられるコメントを取得
       const data = await response.json();
       console.log(data); // サーバー側の応答をコンソールログに表示
-      setPraiseList(prevList => [...prevList, {comment,praise: data.response}]);
-      console.log(praiseList)
+      // 前に表示したコメントを最新のレスポンスで置き換える
+      setPraiseList(prevList =>
+        prevList.map(item => (item.comment === comment ? { ...item, praise: data.response } : item))
+      );
     } catch (error) {
       console.error(error);
     }
@@ -38,10 +43,10 @@ const HomePage = () => {
           return (
             <div key={index}>
               <div className="flex justify-end">
-                <p className="bg-grey-120 text-yellow-520 text-left rounded-xl p-4 w-2/3 mr-36 my-5 opacity-90">{comment}</p>
+                <p className="bg-grey-120 text-yellow-520 text-left rounded-xl p-4 w-2/3 mr-20 m-5 opacity-90">{comment}</p>
               </div>
               <div className="flex justify-start">
-                <p className="bg-grey-120 text-green-700 text-left rounded-xl p-4 w-2/3 ml-36 my-5 opacity-90">{praise}</p>
+                <p className="bg-grey-120 text-green-700 text-left rounded-xl p-4 w-2/3 ml-20 my-5 opacity-90">{praise}</p>
               </div>
             </div>
           );
