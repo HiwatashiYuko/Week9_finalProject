@@ -12,7 +12,7 @@ const HomePage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({ request_data:comment }),
       });
 
       if (!response.ok) {
