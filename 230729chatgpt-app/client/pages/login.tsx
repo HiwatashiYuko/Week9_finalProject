@@ -44,6 +44,7 @@ const Login = () => {
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="パスワード" />
       <button onClick={handleLogin}>ログイン</button>
       <button onClick={handleGoogleLogin}>Googleでログイン</button>
+      <button onClick={() => router.push('/signup')}>新規登録はこちら</button>
     </div>
   );
 };
