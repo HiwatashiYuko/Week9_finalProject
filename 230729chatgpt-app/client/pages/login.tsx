@@ -3,22 +3,24 @@
 // login.tsx
 import React, { useState } from 'react';
 import { auth } from '../firebase/config'; // authをインポート
-import { useHistory } from 'react-router-dom'; // ルーティングに使用
+// import { useNavigate } from 'react-router-dom'; // Import useNavigate ルーティングに使用
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 // import firebaseConfig from '../firebase/config'; // firebase/config.tsの相対パスを指定
+import { useRouter } from 'next/router'; // Import useRouter
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const auth = getAuth(); // authオブジェクトを取得
-  const history = useHistory(); // historyオブジェクトを取得
+  // const auth = getAuth(app); // authオブジェクトを取得
+  // const navigate = useNavigate(); // useNavigateを使用
+    const router = useRouter(); // Initialize useRouter
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       // ログインが成功した場合、次に遷移するページにリダイレクト
-      history.push('/home');
+      router.push('/home');
     } catch (error) {
       alert('ログインに失敗しました。');
     }
@@ -29,7 +31,7 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
       // ログインが成功した場合、次に遷移するページにリダイレクト
-      history.push('/home');
+      router.push('/home'); // Redirect to /home on successful Google login
     } catch (error) {
       alert('Googleログインに失敗しました。');
     }
