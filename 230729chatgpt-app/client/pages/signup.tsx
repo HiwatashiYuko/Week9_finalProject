@@ -1,85 +1,39 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '../styles/Signup.module.css';
 
-
-
-export default function Home() {
+export default function Signup() {
   return (
-    <>
-     
+    <div>
+      <h1 className={styles.title}><strong>CHEER ME</strong></h1>
+      <h2 className={styles.copy}>まいにち頑張っている私を、ほめてあげて、いたわってあげましょう。</h2>
+      <div className={styles.container}>
+        <p>自分の能力に自信が持てず、毎日が不安…。</p>
+        <p>いつか怠けている自分に周囲が気付くのではないか…。</p>
+        <p>家事、仕事、育児。自分なりに考えて一生懸命に頑張っているけど、感謝されない…。</p>
+        <p>自分のことを褒めるのは苦手…。</p>
+        <p>そんなあなたに。</p>
+      </div>  
+      <h2 className={styles.copy}>明日いちにち、自信をもって過ごせますように。</h2>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-    </>
+      <div className={styles.container}>
+        <p>今日いちにちの出来事をつぶやいて、AIにほめてもらえます。</p>
+        <p>今日の「いいこと」を、３つふりかえってみましょう。</p>
+        <p>毎日がんばってきたことが記録できるので、ふりかえってみましょう。</p>
+        <p>「ちいさな目標」を立てて、進んでいく自分を確認してみましょう。</p>
+      </div>
+      <h2 className={styles.copy}>私って、がんばってるかも。</h2>
+      <div className={styles.container}>
+      <p>あなたのこころが少しでも軽くなってくれたらうれしいです。</p>
+      <p>お試し期間の7日後に、有料期間がはじまります。(月額料金300円)</p>
+      
+    
+      <h3>会員登録はこちらから</h3>
+      <input type="text" placeholder="ユーザー名" />
+      <input type="email" placeholder="メールアドレス" />
+      <input type="email" placeholder="メールアドレス(確認用)" />
+      <input type="password" placeholder="パスワード" />
+      <button>登録する</button>
+      <button>Googleアカウントで登録</button>
+      </div>
+    </div>
   )
 }

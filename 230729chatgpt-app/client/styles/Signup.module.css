@@ -1,0 +1,38 @@
+/* Signup.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: vdl-pengentle, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 10rem;
+    color: #474747;
+  }
+  
+  .title {
+    font-family: 'Sacramento', cursive;
+    color: #f7a65e;
+    font-size: 3rem;
+    margin: 3rem 0 0 3rem;
+
+  }
+  
+  .copy {
+    font-size: 1.5rem;
+    color: #f7a65e;
+    margin: 3rem ;
+    font-family: vdl-pengentle, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 3rem;
+  }
+  
