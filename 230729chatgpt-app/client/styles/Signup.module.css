@@ -1,19 +1,18 @@
 /* Signup.module.css */
-@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-family: vdl-pengentle, sans-serif;
+    font-family: "Hannari";
     font-style: normal;
-    font-weight: 600;
+    font-weight: 550;
     margin-left: 10rem;
-    color: #474747;
+    color: dimgray;
   }
   
   .title {
-    font-family: 'Sacramento', cursive;
+    font-family: 'Amatic SC', cursive;
     color: #f7a65e;
     font-size: 3rem;
     margin: 3rem 0 0 3rem;

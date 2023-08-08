@@ -1,6 +1,23 @@
+import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { app, auth } from '../firebase/config';
 import styles from '../styles/Signup.module.css';
 
-export default function Signup() {
+const Signup = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const auth = getAuth(app);
+
+  const handleSignup = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert('会員登録が完了しました！');
+    } catch (error) {
+      alert('会員登録に失敗しました。');
+    }
+  };
+
   return (
     <div>
       <h1 className={styles.title}><strong>CHEER ME</strong></h1>
@@ -22,18 +39,21 @@ export default function Signup() {
       </div>
       <h2 className={styles.copy}>私って、がんばってるかも。</h2>
       <div className={styles.container}>
-      <p>あなたのこころが少しでも軽くなってくれたらうれしいです。</p>
-      <p>お試し期間の7日後に、有料期間がはじまります。(月額料金300円)</p>
+        <p>あなたのこころが少しでも軽くなってくれたらうれしいです。</p>
+        <p>お試し期間の7日後に、有料期間がはじまります。(月額料金300円)</p>
       
-    
-      <h3>会員登録はこちらから</h3>
-      <input type="text" placeholder="ユーザー名" />
-      <input type="email" placeholder="メールアドレス" />
-      <input type="email" placeholder="メールアドレス(確認用)" />
-      <input type="password" placeholder="パスワード" />
-      <button>登録する</button>
-      <button>Googleアカウントで登録</button>
+        <h3>会員登録はこちらから</h3>
+        <input type="text" placeholder="ユーザー名" />
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレス" />
+        <input type="email" placeholder="メールアドレス(確認用)" />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="パスワード"
+        pattern="[a-zA-Z0-9]+" title="パスワードは半角英数字で入力してください。" 
+        required />
+        <button onClick={handleSignup}>登録する</button>
+        <button>Googleアカウントで登録</button>
       </div>
     </div>
   )
 }
+
+export default Signup;

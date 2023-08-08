@@ -1,0 +1,55 @@
+/* Login.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    
+  }
+  
+  .button_container {
+    display: flex;
+    flex-direction: column; /* ボタンを縦に並べるためにcolumnに設定 */
+    align-items: center; /* ボタンを中央に配置 */
+  }  
+  
+  /* ログインボタンのスタイル */
+  .login_button {
+    background-color: #ffa500; /* オレンジ色の背景色 */
+    color: white; /* 文字色を白に */
+    border: none; /* ボーダーをなくす */
+    padding: 10px 20px; /* ボタン内の余白を調整 */
+    margin: 5px; /* ボタン同士の間隔を調整 */
+    cursor: pointer; /* マウスカーソルをポインターに変更 */
+  }
+  
+  /* Googleログインボタンのスタイル */
+  .google_button {
+    background-color: #db4437; /* 赤色の背景色 */
+    color: white; /* 文字色を白に */
+    border: none; /* ボーダーをなくす */
+    padding: 10px 20px; /* ボタン内の余白を調整 */
+    margin: 5px; /* ボタン同士の間隔を調整 */
+    cursor: pointer; /* マウスカーソルをポインターに変更 */
+  }
+  
+  /* 新規会員登録ボタンのスタイル */
+  .signup_button {
+    background-color: #6dc0a9; /* 緑色の背景色 */
+    color: white; /* 文字色を白に */
+    border: none; /* ボーダーをなくす */
+    padding: 10px 20px; /* ボタン内の余白を調整 */
+    margin: 5px; /* ボタン同士の間隔を調整 */
+    cursor: pointer; /* マウスカーソルをポインターに変更 */
+  }
+  

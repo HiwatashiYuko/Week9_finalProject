@@ -79,7 +79,7 @@
 
 # 3 Umechanさんのフロントとの連携を図るべく修正。
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import openai
 
