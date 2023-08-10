@@ -27,27 +27,27 @@ app = FastAPI()
 #     except:
 #         return None
 
-@app.post("/signup")
-def signup(email: str, password: str):
-    try:
-        # メールアドレスとパスワードを受け取り、Firebaseでの会員登録を行う
-        user_credential = createUserWithEmailAndPassword(auth, email, password)
-        # ...
+# @app.post("/signup")
+# def signup(email: str, password: str):
+#     try:
+#         # メールアドレスとパスワードを受け取り、Firebaseでの会員登録を行う
+#         user_credential = createUserWithEmailAndPassword(auth, email, password)
+#         # ...
 
-        # ログインに成功した場合、ユーザーIDを返す
-        return {'message': '会員登録が完了しました！'}
-    except:
-        # ログインに失敗した場合、エラーを返す
-        raise HTTPException(status_code=401, detail='会員登録に失敗しました。')
+#         # ログインに成功した場合、ユーザーIDを返す
+#         return {'message': '会員登録が完了しました！'}
+#     except:
+#         # ログインに失敗した場合、エラーを返す
+#         raise HTTPException(status_code=401, detail='会員登録に失敗しました。')
 
-@app.post("/login")
-def login(id_token: str):
-    try:
-        decoded_token = auth.verify_id_token(id_token)
-        uid = decoded_token['uid']
-        # ログインに成功した場合、ユーザーIDを返す
-        return {'uid': uid}
-    except:
-        # ログインに失敗した場合、エラーを返す
-        raise HTTPException(status_code=401, detail='Invalid ID token')
+# @app.post("/login")
+# def login(id_token: str):
+#     try:
+#         decoded_token = auth.verify_id_token(id_token)
+#         uid = decoded_token['uid']
+#         # ログインに成功した場合、ユーザーIDを返す
+#         return {'uid': uid}
+#     except:
+#         # ログインに失敗した場合、エラーを返す
+#         raise HTTPException(status_code=401, detail='Invalid ID token')
 

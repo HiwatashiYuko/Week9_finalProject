@@ -2,11 +2,11 @@
 
 // login.tsx
 import React, { useState } from 'react';
-import { auth } from '../firebase/config'; // authをインポート
-// import { useNavigate } from 'react-router-dom'; // Import useNavigate ルーティングに使用
+import { auth } from '../firebase/config'; 
+// import { useNavigate } from 'react-router-dom'; 
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import firebaseConfig from '../firebase/config'; // firebase/config.tsの相対パスを指定
-import { useRouter } from 'next/router'; // Import useRouter
+// import firebaseConfig from '../firebase/config'; 
+import { useRouter } from 'next/router'; 
 import styles from '../styles/Login.module.css';
 
 const Login = () => {
@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <h1>Log in</h1>
-      <div className={styles['input-container']}>
+      <div className={styles['input_container']}>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレス" />
       </div>
       <div className={styles['input-container']}>
