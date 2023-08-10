@@ -23,8 +23,10 @@ const HomePage = () => {
 
   const handleSubmitComment = async (comment: string) => {
     try {
-        // 一時的にコメントを表示
-       setPraiseList(prevList => [...prevList, { comment, praise: '...' }]);
+
+      // 一時的にコメントを表示
+      setPraiseList(prevList => [...prevList, { comment, praise: '...' }]);
+
 
       // APIエンドポイントにコメントを送信
       const response = await fetch('http://localhost:8000/chat', {
