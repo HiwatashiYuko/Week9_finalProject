@@ -79,7 +79,7 @@
 
 # 3 Umechanさんのフロントとの連携を図るべく修正。
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import openai
 
@@ -105,7 +105,7 @@ async def chat_with_gpt3(request_data: str):
     client = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "Prompt: 命令\n\n[コンテンツの詳細]\n\nこのコンテンツは、会話の応答です。あなたはインポスター症候群に詳しい心理カウンセラーです。\n\n[アバター]20代~50代の女性\n\n[お悩み]自己否定、パフォーマンスの低下、期待した結果が出ない\n\n(コマンド)\n\n[アバター]がつぶやく内容にアドバイスするのではなく、共感して、気持ちに寄り添ってください。\n\n[アバター]がつぶやいた内容の中から、行動や感情を傾聴したり、感謝の気持ちを伝えてください。\n\n[返答NGワード]頑張る、共感\n\n[返答文字数]50字以内"},
+            {"role": "system", "content": "Prompt: 命令\n\n[コンテンツの詳細]\n\nこのコンテンツは、会話の応答です。あなたはインポスター症候群に詳しい友達です。あなたの悩める親友は高校1年生です。\n\n[お悩み]自己否定、パフォーマンスの低下、期待した結果が出ない\n\n(コマンド)\n\n親友がつぶやく内容をほめてください。\n\nつぶやいた内容の中から、行動や感情を傾聴したり、感謝の気持ちを伝えてください。\n\n[返答NGワード]頑張る、共感\n\n[返答文数]3文以内"},
             {"role": "user", "content": request_data},
         ],
         api_key=api_token
@@ -122,7 +122,17 @@ async def chat_endpoint(request: Request):
     print("応答：", response)  # responseをターミナルに表示
     return {"response": response}
 
-# GPT-3.5 Turboモデルと対話
-# response = chat_with_gpt3(request_data)
+# TODO: データベース設定後に、格納コードを修正する。
+# # データベースに格納する　モデルの定義とデータベースのセッションをインポートするためのコード
+#     from models import PraiseMessage, SessionLocal
+
+#     db = SessionLocal()
+#     db_message = PraiseMessage(comment=request_data, praise=response)
+#     db.add(db_message)
+#     db.commit()
+#     db.refresh(db_message)
+#     db.close()
+
+#     return {"response": response}
 
 

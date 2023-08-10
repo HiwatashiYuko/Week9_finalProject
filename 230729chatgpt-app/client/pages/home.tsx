@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import CommentForm from '../components/CommentForm';
+import { useRouter } from 'next/router';
+import { auth } from '../firebase/config';
 
 const HomePage = () => {
   const [praiseList, setPraiseList] = useState<{ comment: string; praise: string }[]>([]);
+  const auth = getAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    // ログイン状態の変更を監視
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (!user) {
+        // ログインしていない場合、ログインページにリダイレクト
+        router.push('/login'); // ログインページのURLに置き換える
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth, router]);
 
   const handleSubmitComment = async (comment: string) => {
     try {
+
       // 一時的にコメントを表示
       setPraiseList(prevList => [...prevList, { comment, praise: '...' }]);
+
 
       // APIエンドポイントにコメントを送信
       const response = await fetch('http://localhost:8000/chat', {
