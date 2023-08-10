@@ -23,7 +23,7 @@ const HomePage = () => {
 
   const handleSubmitComment = async (comment: string) => {
     try {
-       // 一時的にコメントを表示
+        // 一時的にコメントを表示
        setPraiseList(prevList => [...prevList, { comment, praise: '...' }]);
 
       // APIエンドポイントにコメントを送信
