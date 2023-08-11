@@ -6,10 +6,11 @@ import { auth } from '../firebase/config';
 
 const HomePage = () => {
   const [praiseList, setPraiseList] = useState<{ comment: string; praise: string }[]>([]);
-  const auth = getAuth();
   const router = useRouter();
 
   useEffect(() => {
+     // Firebaseの初期化
+    const auth = getAuth();
     // ログイン状態の変更を監視
     const unsubscribe = onAuthStateChanged(auth, user => {
       if (!user) {
