@@ -1,0 +1,37 @@
+/* Signup.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Hannari";
+    font-style: normal;
+    font-weight: 550;
+    margin-left: 10rem;
+    color: dimgray;
+  }
+  
+  .title {
+    font-family: 'Amatic SC', cursive;
+    color: #f7a65e;
+    font-size: 3rem;
+    margin: 3rem 0 0 3rem;
+
+  }
+  
+  .copy {
+    font-size: 1.5rem;
+    color: #f7a65e;
+    margin: 3rem ;
+    font-family: vdl-pengentle, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 3rem;
+  }
+  
