@@ -79,9 +79,11 @@
 
 # 3 Umechanさんのフロントとの連携を図るべく修正。
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import openai
+from fastapi.responses import JSONResponse
+import stripe
 
 app = FastAPI()
 
@@ -126,3 +128,33 @@ async def chat_endpoint(request: Request):
 # response = chat_with_gpt3(request_data)
 
 
+stripe.api_key = 'sk_test_51NcIHqILFuiHCcLQPIMyGAHMF55bwNPZacJEMkZOnQgIns1gsP7Cb5QQIlcX6zuqmKPZiSZcFPFOoTxZeF7Wptcx00UwshPAWS'
+
+# This is your Stripe CLI webhook secret for testing your endpoint locally.
+endpoint_secret = 'whsec_adf2e988827e9ffdac29330253ee0cb76cd992af2f22742f0b496a9a55e8cccc'
+
+@app.post('/webhook')
+async def webhook(request: Request):
+    payload = await request.body()
+    sig_header = request.headers['stripe-signature']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise HTTPException(status_code=400, detail=str(e))
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # イベントを処理
+    if event['type'] == 'payment_intent.succeeded':
+        payment_intent = event['data']['object']
+        # ... イベントの処理
+        print('Payment Intent Succeeded:', payment_intent)
+    else:
+        print('Unhandled event type {}'.format(event['type']))
+
+    return JSONResponse(content={'message': 'Success'}, status_code=200)
