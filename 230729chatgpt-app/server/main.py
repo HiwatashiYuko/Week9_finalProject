@@ -164,6 +164,24 @@ async def webhook(request: Request):
         payment_intent = event['data']['object']
         # ... イベントの処理
         print('Payment Intent Succeeded:', payment_intent)
+    elif event['type'] == 'customer.subscription.created':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録
+    elif event['type'] == 'customer.subscription.updated':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録
+    elif event['type'] == 'customer.subscription.deleted':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録   
     else:
         print('Unhandled event type {}'.format(event['type']))
 
