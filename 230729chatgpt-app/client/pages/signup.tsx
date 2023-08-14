@@ -7,8 +7,7 @@ import { useRouter } from 'next/router';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [username, setUsername] = useState(''); 
+  const [userName, setUserName] = useState(''); 
 
   const auth = getAuth(app);
   const router = useRouter();
@@ -20,15 +19,31 @@ const Signup = () => {
 
       // ユーザー名を表示名として設定
       await updateProfile(user, {
-        displayName: displayName
+        displayName: userName
       });
 
-      alert('会員登録が完了しました！');
-       // 会員登録成功後に入力欄をリセット
-       setEmail('');
-       setPassword('');
-       setUsername('');
-       router.push('/home');
+      const response = await fetch('/create_user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userName: userName,
+          uid: user.uid
+        })
+      });
+
+      console.log(response);
+
+      if (response.status === 200) {
+        alert('会員登録が完了しました！');
+        setEmail('');
+        setPassword('');
+        setUserName('');
+        router.push('/home');
+      } else {
+        alert('会員登録に失敗しました。');
+      }
     } catch (error) {
       console.error("会員登録エラー:", error);
       alert('会員登録に失敗しました。');
@@ -74,8 +89,8 @@ const Signup = () => {
         <h3>会員登録はこちらから</h3>
         <input
         type="text"
-        value={username} // ユーザー名の状態変数をvalueにセット
-        onChange={(e) => setUsername(e.target.value)} // 状態変数を更新するハンドラ
+        value={userName} // ユーザー名の状態変数をvalueにセット
+        onChange={(e) => setUserName(e.target.value)} // 状態変数を更新するハンドラ
         placeholder="ユーザー名"
       />
       <input

@@ -2,12 +2,12 @@
 
 // login.tsx
 import React, { useState } from 'react';
-import { auth } from '../firebase/config'; 
-// import { useNavigate } from 'react-router-dom'; 
+import { app, auth } from '../firebase/config'; 
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 // import firebaseConfig from '../firebase/config'; 
 import { useRouter } from 'next/router'; 
 import styles from '../styles/Login.module.css';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');

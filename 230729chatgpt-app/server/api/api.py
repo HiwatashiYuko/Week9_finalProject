@@ -1,8 +1,29 @@
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import FastAPI, APIRouter, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import openai
+from pydantic import BaseModel
+
 
 router = APIRouter()
+
+# Firestore初期化
+db = firestore.client()
+
+class UserCreate(BaseModel):
+    username: str
+    uid: str
+
+@app.post("/signup")
+def create_user(user_data: UserCreate):
+    try:
+        user_ref = db.collection("users").document(user_data.uid)
+        user_ref.set({
+            "username": user_data.username,
+            "uid": user_data.uid
+        })
+        return {"message": "User created successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/")
 async def root():
@@ -52,3 +73,4 @@ async def record_good_things(good_things: list[str]):
     # goodThings をデータベースに格納する処理などを追加する
     # ここではデータベースの設定がまだ行われていないため、一時的に受け取ったデータを表示するだけの処理とします
     return {"message": f"受け取った goodThings: {good_things}"}
+
