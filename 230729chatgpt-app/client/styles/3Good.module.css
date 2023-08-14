@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Hannari";
+    font-style: normal;
+    font-weight: 550;
+    margin-left: 10rem;
+    color: dimgray;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Hannari";
+    margin: 2rem;
+    width: 200%;
+  }
