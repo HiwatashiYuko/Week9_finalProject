@@ -20,9 +20,9 @@ ENGINE = create_engine(db_url, echo=True)
 # DBに対してORM操作するときに利用
 # Sessionを通じて操作を行う
 session = scoped_session(
-    sessionmaker(autocommit=False, autoflush=False, bind=ENGINE)
+    sessionmaker(autocommit=False, autoflush=False, bind=ENGINE )
 )
 
 # 各modelで利用
 # classとDBをMapping
-Base = declarative_base()
+Base = declarative_base()   #DB基底クラスの作成
