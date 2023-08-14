@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import CommentForm from '../components/CommentForm';
 import { useRouter } from 'next/router';
 import { auth } from '../firebase/config';
@@ -30,12 +30,12 @@ const HomePage = () => {
 
 
       // APIエンドポイントにコメントを送信
-      const response = await fetch('http://localhost:8000/chat', {
+      const response = await fetch('http://localhost:8000/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ request_data:comment }),
+        body: JSON.stringify({ request_data:comment }), 
       });
 
       if (!response.ok) {

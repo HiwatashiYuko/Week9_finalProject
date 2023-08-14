@@ -32,7 +32,7 @@ const Header = () => {
         <Link href="/3good">今日の良かったことを記録する</Link>
       </div>
       <div>
-        <Link href="/chat">今までの良かったことを見る</Link>
+        <Link href="/calendarpage">今までの良かったことを見る</Link>
       </div>
       <div>
         <Link href="/progress">「小さな目標」の進みを確認</Link>

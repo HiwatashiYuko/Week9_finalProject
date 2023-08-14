@@ -1,0 +1,21 @@
+/* Calendar.module.css */
+.container {
+    text-align: center;
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .calendarDay {
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    background-color: lightgray;
+    border-radius: 50%;
+  }
+  
+  /* その他のスタイルを追加 */
+  
