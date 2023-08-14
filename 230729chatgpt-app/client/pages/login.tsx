@@ -44,7 +44,7 @@ const Login = () => {
       <div className={styles['input_container']}>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="メールアドレス" />
       </div>
-      <div className={styles['input-container']}>
+      <div className={styles['input_container']}>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="パスワード" />
       </div>
       <div className={styles.button_container}>
