@@ -79,7 +79,7 @@
 
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 
