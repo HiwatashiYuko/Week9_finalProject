@@ -86,6 +86,8 @@ from api.api import router as api_router    #.api.apiではエラーが出たの
 from fastapi.responses import JSONResponse
 import stripe
 
+from sql import setting
+from table import User, Subscription
 
 app = FastAPI()
 app.include_router(api_router, prefix="/api")
@@ -108,6 +110,27 @@ stripe.api_key = 'sk_test_51NcIHqILFuiHCcLQPIMyGAHMF55bwNPZacJEMkZOnQgIns1gsP7Cb
 # This is your Stripe CLI webhook secret for testing your endpoint locally.
 endpoint_secret = 'whsec_adf2e988827e9ffdac29330253ee0cb76cd992af2f22742f0b496a9a55e8cccc'
 
+def update_stripe_customer_id(client_reference_id, customer_id):
+    # client_reference_id が user_id と一致するユーザーを検索
+    user = User.query.filter_by(user_id=client_reference_id).first()
+
+    if user:
+        # ユーザーが見つかった場合、stripe_customer_id を customer_id で上書き
+        user.stripe_customer_id = customer_id
+        session.commit()
+        print(f"Updated stripe_customer_id for user {user.user_id}")
+    else:
+        print("User not found")
+
+def update_subscription_status(customer_id, subscription_status):
+    subscription = Subscription.query.filter_by(stripe_customer_id=customer_id).first()
+    if subscription:
+        subscription.stripe_status = subscription_status
+        session.commit()
+    else:
+        print("Subscription not found")
+
+
 @app.post('/webhook')
 async def webhook(request: Request):
     payload = await request.body()
@@ -129,24 +152,31 @@ async def webhook(request: Request):
         payment_intent = event['data']['object']
         # ... イベントの処理
         print('Payment Intent Succeeded:', payment_intent)
+    elif event['type'] == 'checkout.session.completed':
+        client_reference_id = event['data']['object']['client_reference_id']
+        customer_id = event['data']['object']['customer']
+        update_stripe_customer_id(client_reference_id, customer_id)
     elif event['type'] == 'customer.subscription.created':
         subscription = event['data']['object']
         customer_id = subscription['customer']
         subscription_status = subscription['status']
         print('customer_id:', customer_id, 'status:', subscription_status)
         # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)
     elif event['type'] == 'customer.subscription.updated':
         subscription = event['data']['object']
         customer_id = subscription['customer']
         subscription_status = subscription['status']
         print('customer_id:', customer_id, 'status:', subscription_status)
         # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)
     elif event['type'] == 'customer.subscription.deleted':
         subscription = event['data']['object']
         customer_id = subscription['customer']
         subscription_status = subscription['status']
         print('customer_id:', customer_id, 'status:', subscription_status)
-        # TODO DBにstatusを登録   
+        # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)   
     else:
         print('Unhandled event type {}'.format(event['type']))
 
