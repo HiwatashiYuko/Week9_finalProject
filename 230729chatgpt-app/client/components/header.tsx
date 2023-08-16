@@ -23,7 +23,7 @@ const Header = () => {
   }
   
   return (
-    <header className="flex justify-between bg-green-510">
+    <header className="flex justify-between bg-green-510 sticky top-0">
       <div>
         <Link href="/home">ほめてもらう</Link>
       </div>
