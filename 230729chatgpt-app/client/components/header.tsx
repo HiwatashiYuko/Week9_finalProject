@@ -23,23 +23,26 @@ const Header = () => {
   }
   
   return (
-    <header className="flex justify-between bg-green-510 sticky top-0">
-      <div>
-        <Link href="/home">ほめてもらう</Link>
-      </div>
-      {/* リンク要修正 */}
-      <div>
-        <Link href="/3good">今日の良かったことを記録する</Link>
-      </div>
-      <div>
-        <Link href="/calendarpage">今までの良かったことを見る</Link>
-      </div>
-      <div>
-        <Link href="/progress">「小さな目標」の進みを確認</Link>
-      </div>
-      <div>
-         {/* ログアウトボタンを追加 */}
-         <button onClick={handleLogout}>ログアウト</button>
+    <header className="bg-green-510 sticky top-0">
+      <h1 className="font-bold text-8xl text-yellow-520 text-center">Cheer Me</h1>
+      <div className="flex justify-between">
+        <div>
+          <Link href="/home">ほめてもらう</Link>
+        </div>
+        {/* リンク要修正 */}
+        <div>
+          <Link href="/3good">今日の良かったことを記録する</Link>
+        </div>
+        <div>
+          <Link href="/calendarpage">今までの良かったことを見る</Link>
+        </div>
+        <div>
+          <Link href="/progress">「小さな目標」の進みを確認</Link>
+        </div>
+        <div>
+          {/* ログアウトボタンを追加 */}
+          <button onClick={handleLogout}>ログアウト</button>
+        </div>
       </div>
     </header>
   );
