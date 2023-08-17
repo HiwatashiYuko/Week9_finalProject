@@ -23,6 +23,10 @@ const Signup = () => {
         displayName: displayName
       });
 
+      // 決済Linkのウィンドウを開く　TODO：URLパラメータclient_reference_idにuser_idを渡す
+      const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289?prefilled_email=${email}`;
+      window.open(stripePaymentLinkUrl, '_blank')
+
       alert('会員登録が完了しました！');
        // 会員登録成功後に入力欄をリセット
        setEmail('');
@@ -40,6 +44,9 @@ const Signup = () => {
     try {
       await signInWithPopup(auth, provider);
       // ログインが成功した場合、次に遷移するページにリダイレクト
+      const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289`;
+      window.open(stripePaymentLinkUrl, '_blank')
+
       router.push('/home'); // Redirect to /home on successful Google login
       alert('会員登録が完了しました！');
     } catch (error) {

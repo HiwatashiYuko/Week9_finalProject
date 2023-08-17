@@ -79,10 +79,15 @@
 
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 
+from fastapi.responses import JSONResponse
+import stripe
+
+from sql.setting import session
+from sql.table import User, Subscription, Payment
 
 app = FastAPI()
 app.include_router(api_router, prefix="/api")
@@ -100,3 +105,104 @@ app.add_middleware(
 
 
 
+stripe.api_key = 'sk_test_51NcIHqILFuiHCcLQPIMyGAHMF55bwNPZacJEMkZOnQgIns1gsP7Cb5QQIlcX6zuqmKPZiSZcFPFOoTxZeF7Wptcx00UwshPAWS'
+
+# This is your Stripe CLI webhook secret for testing your endpoint locally.
+endpoint_secret = 'whsec_adf2e988827e9ffdac29330253ee0cb76cd992af2f22742f0b496a9a55e8cccc'
+
+def update_stripe_customer_id(client_reference_id, customer_id):
+    # client_reference_id が user_id と一致するユーザーを検索
+    user = session.query(User).filter_by(user_id=client_reference_id).first()
+
+    if user:
+        # ユーザーが見つかった場合、stripe_customer_id を customer_id で上書き
+        user.stripe_customer_id = customer_id
+        session.commit()
+        print(f"Updated stripe_customer_id for user {user.user_id}")
+    else:
+        print("User not found")
+
+def update_subscription_info(client_reference_id, subscription_id):
+    user = session.query(User).filter_by(user_id=client_reference_id).first()
+
+    if user:
+        subscription = Subscription()
+        subscription.stripe_subscription_id = subscription_id
+        subscription.stripe_customer_id = user.stripe_customer_id
+        session.add(subscription)
+        session.commit()
+        print(f"Subscription info updated for user {user.user_id}")
+    else:
+        print("User not found")
+
+def update_subscription_status(customer_id, subscription_status):
+    subscription = session.query(Subscription).filter_by(stripe_customer_id=customer_id).first()
+    if subscription:
+        subscription.stripe_status = subscription_status
+        session.commit()
+    else:
+        print("Subscription not found")
+
+def save_payment_info(customer_id, payment_intent_id):
+    payment = Payment()
+    payment.stripe_customer_id = customer_id
+    payment.stripe_payment_id = payment_intent_id
+    session.add(payment)
+    session.commit()
+    print(f"Payment info saved for customer {customer_id}")
+
+@app.post('/webhook')
+async def webhook(request: Request):
+    payload = await request.body()
+    sig_header = request.headers['stripe-signature']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise HTTPException(status_code=400, detail=str(e))
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # イベントを処理
+    if event['type'] == 'payment_intent.succeeded':
+        payment_intent = event['data']['object']
+        customer_id = payment_intent['customer']
+        payment_intent_id = payment_intent['id']
+        # ... イベントの処理
+        save_payment_info(customer_id, payment_intent_id)
+        print('Payment Intent Succeeded:', payment_intent)
+    elif event['type'] == 'checkout.session.completed':
+        client_reference_id = event['data']['object']['client_reference_id']
+        customer_id = event['data']['object']['customer']
+        subscription_id = event['data']['object']['subscription']
+        update_stripe_customer_id(client_reference_id, customer_id)
+        update_subscription_info(client_reference_id, subscription_id)
+    elif event['type'] == 'customer.subscription.created':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)
+    elif event['type'] == 'customer.subscription.updated':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)
+    elif event['type'] == 'customer.subscription.deleted':
+        subscription = event['data']['object']
+        customer_id = subscription['customer']
+        subscription_status = subscription['status']
+        print('customer_id:', customer_id, 'status:', subscription_status)
+        # TODO DBにstatusを登録
+        update_subscription_status(customer_id, subscription_status)   
+    else:
+        print('Unhandled event type {}'.format(event['type']))
+
+    return JSONResponse(content={'message': 'Success'}, status_code=200)
