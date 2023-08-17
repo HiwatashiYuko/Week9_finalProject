@@ -34,19 +34,12 @@ const Signup = () => {
         })
       });
 
-      const responseBody = await response.json();  // JSONデータを読み取る
-
-      console.log(responseBody);
-
-      if (response.status === 200) {
-        alert('会員登録が完了しました！');
-        setEmail('');
-        setPassword('');
-        setUserName('');
-        router.push('/home');
-      } else {
-        alert('会員登録に失敗しました。');
-      }
+      alert('会員登録が完了しました！');
+       // 会員登録成功後に入力欄をリセット
+       setEmail('');
+       setPassword('');
+       setUsername('');
+       router.push('/home');
     } catch (error) {
       console.error("会員登録エラー:", error);
       alert('会員登録に失敗しました。');
@@ -57,7 +50,11 @@ const Signup = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      router.push('/home'); 
+      // ログインが成功した場合、次に遷移するページにリダイレクト
+      const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289`;
+      window.open(stripePaymentLinkUrl, '_blank')
+
+      router.push('/home'); // Redirect to /home on successful Google login
       alert('会員登録が完了しました！');
     } catch (error) {
       alert('Googleログインに失敗しました。');
