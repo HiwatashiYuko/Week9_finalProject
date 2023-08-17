@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date,ForeignKey
-# from sql.setting import ENGINE,Base
-from setting import ENGINE,Base
+from sql.setting import ENGINE,Base
+# from setting import ENGINE,Base
 import sys
 from sqlalchemy.orm import relationship
 
@@ -68,7 +68,7 @@ class QuoteOfTheDay(Base):
 class Subscription(Base):
     __tablename__="subscription"
 
-    settlement_id = Column(Integer,primary_key=True)
+    subscription_id = Column(Integer,primary_key=True)
     stripe_customer_id = Column(String(50), ForeignKey("user.stripe_customer_id"))
     stripe_subscription_id = Column(String(50))
     stripe_status = Column(String(50))
@@ -84,7 +84,7 @@ class Payment(Base):
 
     payment_id = Column(Integer,primary_key=True)
     stripe_customer_id = Column(String(50), ForeignKey("user.stripe_customer_id"))
-    column3 = Column(Integer)
+    stripe_payment_id = Column(String)
 
     user = relationship("User", back_populates="payment")
 
