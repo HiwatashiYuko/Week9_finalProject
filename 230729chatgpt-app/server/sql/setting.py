@@ -1,6 +1,9 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
+import os
+
+DATABASE_URL = "mysql+pymysql://admin:password@db:3306/teamb"
 
 Dialect = "mysql"
 driver = "pymysql"
@@ -8,14 +11,17 @@ username = "admin"
 password = "password"
 # host = "172.20.0.4"
 # host = "172.17.48.1"
-host = "localhost"
-port = "3308"
+# host = "localhost"
+host = "db"
+# port = "3308"
+port = "3306"
 database = "teamb"
 charset_type = "utf8"
 db_url =  f"{Dialect}+{driver}://{username}:{password}@{host}:{port}/{database}?charset={charset_type}"
 
 # DB接続するためのEngineインスタンス
 ENGINE = create_engine(db_url, echo=True)
+
 
 # DBに対してORM操作するときに利用
 # Sessionを通じて操作を行う

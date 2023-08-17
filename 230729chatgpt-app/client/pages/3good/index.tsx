@@ -34,31 +34,48 @@ const ThreeGoodThings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
+      // user_id: 'user_id', 
       date: selectedDate.toISOString().substr(0, 10),
       goodThings: goodThings,
     };
 
-    try {
-      const response = await fetch('/3good', {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData), // goodThings を送信
-      });
+    // formData の内容をコンソールに出力
+  // console.log('送信するデータ:', formData);
 
-      if (!response.ok) {
-        throw new Error('エラーが発生しました');
-      }
+  try {
+    const data = {
+      // user_id: 'some_user_id', // ユーザーIDを適切に設定してください
+      date: formData.date,
+      good_thing_1: formData.goodThings[0],
+      good_thing_2: formData.goodThings[1],
+      good_thing_3: formData.goodThings[2]
+    };
+  
+    console.log('送信するデータ:', data); 
 
-      // データの送信に成功した場合、入力欄をリセットする
-      setGoodThings(['', '', '']);
-
-      // ページ遷移などの処理を行う
-      router.push('/3good/done'); // 遷移先の URL に置き換える
-    } catch (error) {
-      console.error('データ送信エラー:', error);
+    const response = await fetch('http://localhost:8000/api/3good', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  
+    if (!response.ok) {
+      throw new Error('エラーが発生しました');
     }
+  
+    const responseData = await response.json();
+    console.log(responseData);
+  
+    // データの送信に成功した場合、入力欄をリセットする
+    setGoodThings(['', '', '']);
+  
+    // ページ遷移などの処理を行う
+    router.push('/3good/done'); // 遷移先の URL に置き換える
+  } catch (error) {
+    console.error('データ送信エラー:', error);
+  }
   };
 
   return (

@@ -1,29 +1,52 @@
-from fastapi import FastAPI, APIRouter, Request, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status, Request
+from firebase_admin import auth
+from sqlalchemy.orm import Session
+from models.models import User
+from models.models import ThreeGoodThings  
+from sqlalchemy.orm import Session  
+from sql.database import SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import openai
-from pydantic import BaseModel
-
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, ValidationError
+from sql import database
+import models
 
 router = APIRouter()
 
-# Firestore初期化
-db = firestore.client()
+@router.exception_handler(ValidationError)
+async def validation_exception_handler(request: Request, exc: ValidationError):
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors()},
+    )
 
-class UserCreate(BaseModel):
-    username: str
-    uid: str
-
-@app.post("/signup")
-def create_user(user_data: UserCreate):
+# データベースに接続するためのセッションオブジェクトを取得する依存関係を定義する
+def get_db():
+    db = database.SessionLocal()
     try:
-        user_ref = db.collection("users").document(user_data.uid)
-        user_ref.set({
-            "username": user_data.username,
-            "uid": user_data.uid
-        })
-        return {"message": "User created successfully"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        yield db
+    finally:
+        db.close()
+
+# IDトークンからユーザーIDを取得する関数
+def get_user_id(id_token):
+    decoded_token = auth.verify_id_token(id_token)
+    return decoded_token['uid']
+
+# /signupエンドポイントの実装
+@router.post("/signup")
+async def signup(request: Request, db: Session = Depends(get_db)):
+    data = await request.json()
+    user_name = data.get("user_name")
+    id_token = data.get("id_token")
+    uid = get_user_id(id_token)
+    # user_nameとuidを使用して、ユーザーを登録する処理を実行する
+    db_user = models.User(user_name=user_name, firebase_uid=uid)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return {"message": "User registered successfully."}
 
 @router.get("/")
 async def root():
@@ -68,9 +91,29 @@ async def chat_endpoint(request: Request):
 
 #     return {"response": response}
 
-@router.post("/3good")
-async def record_good_things(good_things: list[str]):
-    # goodThings をデータベースに格納する処理などを追加する
-    # ここではデータベースの設定がまだ行われていないため、一時的に受け取ったデータを表示するだけの処理とします
-    return {"message": f"受け取った goodThings: {good_things}"}
 
+# @router.get("/3good")
+# async def update_3good(data: dict):
+#     # データを処理してデータベースに保存するコードをここに書く
+#     return {"result": "success"}
+
+@router.post("/3good")
+async def record_good_things(request: Request, db: Session = Depends(get_db)):  # 引数を追加
+    data = await request.json()  # JSONデータを取得
+    user_id = data.get("user_id")  # user_id を取得
+    date = data.get("date")  # date を取得
+    good_things = data.get("goodThings")  # goodThings を取得
+
+    # ThreeGoodThings オブジェクトを作成し、データベースに保存
+    good_things_record = ThreeGoodThings(
+        user_id=user_id,
+        date=date,
+        good_thing_1=good_things[0],
+        good_thing_2=good_things[1],
+        good_thing_3=good_things[2],
+    )
+    db.add(good_things_record)
+    db.commit()
+    db.refresh(good_things_record)
+
+    return {"message": f"受け取った goodThings: {good_things}"}

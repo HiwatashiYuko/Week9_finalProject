@@ -82,7 +82,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.api import router as api_router    
+import firebase_admin
 from firebase_admin import credentials, firestore, initialize_app
+import pymysql
+from setting import DATABASE_URL
 
 app = FastAPI()
 
@@ -92,10 +95,14 @@ firebase_admin.initialize_app(cred)
 
 app.include_router(api_router, prefix="/api")
 
+pymysql.install_as_MySQLdb()
+
+
 # CORSミドルウェアを追加
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # すべてのオリジンを許可
+    allow_credentials=True,
     allow_methods=["*"],  # すべてのHTTPメソッドを許可
     allow_headers=["*"],  # すべてのヘッダーを許可
 )
