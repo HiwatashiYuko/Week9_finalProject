@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getAuth, signOut } from 'firebase/auth';
+
+// export const getServerSideProps = async () => {
+//   // FastAPIのエンドポイントを呼び出して今日の一言を取得
+//   const response = await fetch('http://localhost:8000/quotes');
+//   const data = await response.json();
+//   console.log(data)
+//   return {
+//     props: {
+//       todaysQuote: data.quote
+//     }
+//   };
+// };
 
 const Header = () => {
   const router = useRouter();
@@ -21,11 +33,23 @@ const Header = () => {
   if (router.pathname === '/login' || router.pathname === '/signup') {
     return null;
   }
-  
+  const [quote, setQuote] = useState('');
+  useEffect(() => {
+    fetch('http://localhost:8000/quotes')
+      .then(response => response.json())
+      .then(data => {
+        setQuote(data.quote);
+      })
+      .catch(error => {
+        console.error('APIエラー:', error);
+      });
+  }, []);
+
   return (
     <header className="bg-green-510 sticky top-0">
-      <h1 className="font-bold text-8xl text-yellow-520 text-center">Cheer Me</h1>
-      <div className="flex justify-between">
+      <h1 className="font-bold text-6xl text-yellow-520 text-center">CHEER ME</h1>
+      <p className="text-2xl font-yomogi text-center">{quote}</p>
+      <div className="flex justify-between mt-2">
         <div>
           <Link href="/home">ほめてもらう</Link>
         </div>
@@ -47,6 +71,7 @@ const Header = () => {
     </header>
   );
 };
+
 
 export default Header;
 

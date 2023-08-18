@@ -86,8 +86,10 @@ from api.api import router as api_router    #.api.apiではエラーが出たの
 from fastapi.responses import JSONResponse
 import stripe
 
+from sqlalchemy.orm import Session
 from sql.setting import session
-from sql.table import User, Subscription, Payment
+from sql.table import User, Subscription, Payment, QuoteOfTheDay
+import random
 
 app = FastAPI()
 app.include_router(api_router, prefix="/api")
@@ -206,3 +208,16 @@ async def webhook(request: Request):
         print('Unhandled event type {}'.format(event['type']))
 
     return JSONResponse(content={'message': 'Success'}, status_code=200)
+
+
+def get_random_quote(session: Session):
+    quotes_count = session.query(QuoteOfTheDay).count()
+    random_offset = random.randint(0, quotes_count - 1)
+    random_quote = session.query(QuoteOfTheDay).offset(random_offset).first()
+    return random_quote.quotation if random_quote else "No quotes available"
+
+@app.get('/quotes')
+async def get_quote():
+    random_quote = get_random_quote(session)    
+    # レスポンスとしてJSONを返す
+    return JSONResponse(content={"quote": random_quote})

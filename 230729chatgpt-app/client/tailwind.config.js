@@ -22,6 +22,9 @@ module.exports = {
           110: '#e6e6e6',
           120: '#FFF8F9',
         }
+      },
+      fontFamily:{
+        yomogi: ['Yomogi']
       }
     },
   },
