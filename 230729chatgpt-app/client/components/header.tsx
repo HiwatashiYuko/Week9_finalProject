@@ -3,17 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getAuth, signOut } from 'firebase/auth';
 
-// export const getServerSideProps = async () => {
-//   // FastAPIのエンドポイントを呼び出して今日の一言を取得
-//   const response = await fetch('http://localhost:8000/quotes');
-//   const data = await response.json();
-//   console.log(data)
-//   return {
-//     props: {
-//       todaysQuote: data.quote
-//     }
-//   };
-// };
 
 const Header = () => {
   const router = useRouter();
@@ -47,7 +36,7 @@ const Header = () => {
 
   return (
     <header className="bg-green-510 sticky top-0">
-      <h1 className="font-bold text-6xl text-yellow-520 text-center">CHEER ME</h1>
+      <h1 className="font-ubuntu font-bold text-6xl text-yellow-520 text-center">CHEER ME</h1>
       <p className="text-2xl font-yomogi text-center">{quote}</p>
       <div className="flex justify-between mt-2">
         <div>
