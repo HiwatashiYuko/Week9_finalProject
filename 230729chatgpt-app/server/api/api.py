@@ -3,23 +3,22 @@ from firebase_admin import auth
 from sqlalchemy.orm import Session
 from models.models import User
 from models.models import ThreeGoodThings  
-from sqlalchemy.orm import Session  
 from sql.database import SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import openai
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ValidationError
 from sql import database
-import models
+# import models
 
 router = APIRouter()
 
-@router.exception_handler(ValidationError)
-async def validation_exception_handler(request: Request, exc: ValidationError):
-    return JSONResponse(
-        status_code=422,
-        content={"detail": exc.errors()},
-    )
+# @router.exception_handler(ValidationError)
+# async def validation_exception_handler(request: Request, exc: ValidationError):
+#     return JSONResponse(
+#         status_code=422,
+#         content={"detail": exc.errors()},
+#     )
 
 # データベースに接続するためのセッションオブジェクトを取得する依存関係を定義する
 def get_db():
@@ -35,6 +34,11 @@ def get_user_id(id_token):
     return decoded_token['uid']
 
 # /signupエンドポイントの実装
+# @router.get("/signup")
+# async def get_firebase_uid(request_data: str):
+#     uid = 
+
+    
 @router.post("/signup")
 async def signup(request: Request, db: Session = Depends(get_db)):
     data = await request.json()
@@ -51,6 +55,10 @@ async def signup(request: Request, db: Session = Depends(get_db)):
 @router.get("/")
 async def root():
     return {"message": "Hello python!"}
+
+@router.get("/healthCheck")
+async def health_check():
+    return {"status": "success"}
 
 @router.get("/chat")
 async def chat_with_gpt3(request_data: str):
@@ -100,20 +108,29 @@ async def chat_endpoint(request: Request):
 @router.post("/3good")
 async def record_good_things(request: Request, db: Session = Depends(get_db)):  # 引数を追加
     data = await request.json()  # JSONデータを取得
+    print(data)
     user_id = data.get("user_id")  # user_id を取得
     date = data.get("date")  # date を取得
-    good_things = data.get("goodThings")  # goodThings を取得
+    good_things = data.get("good_thing_1")  # good_thing_1 を取得
+    good_thing_2 = data.get("good_thing_2")  # good_thing_2 を取得
+    good_thing_3 = data.get("good_thing_3")  # good_thing_3 を取得
 
+    if good_things is None:
+        return {"message": "goodThingsフィールドが存在しません"}
+    
     # ThreeGoodThings オブジェクトを作成し、データベースに保存
-    good_things_record = ThreeGoodThings(
-        user_id=user_id,
-        date=date,
-        good_thing_1=good_things[0],
-        good_thing_2=good_things[1],
-        good_thing_3=good_things[2],
-    )
-    db.add(good_things_record)
-    db.commit()
-    db.refresh(good_things_record)
-
+    # good_things_record = ThreeGoodThings(
+    #     user_id=user_id,
+    #     date=date,
+    #     good_thing_1=good_things[0],
+    #     good_thing_2=good_things[1],
+    #     good_thing_3=good_things[2],
+    # )
+    # db.add(good_things_record)
+    # db.commit()
+    # db.refresh(good_things_record)
     return {"message": f"受け取った goodThings: {good_things}"}
+
+# 最後にルーターを返す
+def get_router():
+    return router

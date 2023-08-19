@@ -34,39 +34,42 @@ const ThreeGoodThings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      // user_id: 'user_id', 
+      threeGood_id: 'threeGood_id', 
       date: selectedDate.toISOString().substr(0, 10),
       goodThings: goodThings,
+      user_id: 'user_id',
     };
-
-    // formData の内容をコンソールに出力
-  // console.log('送信するデータ:', formData);
 
   try {
     const data = {
-      // user_id: 'some_user_id', // ユーザーIDを適切に設定してください
+      threeGood_id: 'threeGood_id',
       date: formData.date,
       good_thing_1: formData.goodThings[0],
       good_thing_2: formData.goodThings[1],
-      good_thing_3: formData.goodThings[2]
+      good_thing_3: formData.goodThings[2],
+      // user_id: 'user_id'
     };
   
     console.log('送信するデータ:', data); 
-
+    console.log(formData.goodThings);
+    
     const response = await fetch('http://localhost:8000/api/3good', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
+      mode: 'cors', // この行を追加
     });
   
+    console.log('レスポンス:', response);
+
     if (!response.ok) {
       throw new Error('エラーが発生しました');
     }
   
     const responseData = await response.json();
-    console.log(responseData);
+    console.log('成功レスポンスデータ:', responseData);
   
     // データの送信に成功した場合、入力欄をリセットする
     setGoodThings(['', '', '']);

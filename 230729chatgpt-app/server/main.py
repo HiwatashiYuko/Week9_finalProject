@@ -78,17 +78,21 @@
 # print("応答：", response)
 
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
-
+import firebase_admin
+import pymysql
+import stripe
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
-
+from firebase_admin import credentials
 
 app = FastAPI()
 
 # Firebase Admin SDK初期化
 cred = credentials.Certificate("teamb-a39e7-firebase-adminsdk-mabvn-cdf66d7193.json")
-firebase_admin.initialize_app(cred)
+# firebase_admin.initialize_app(cred)
+default_app = firebase_admin.initialize_app(cred)
+print(default_app.name)  # "[DEFAULT]"
 
 app.include_router(api_router, prefix="/api")
 

@@ -1,11 +1,10 @@
 // pages/3good/done.tsx
 
-import WateringAnimation from '../../components/WateringAnimation'; 
-import styles from '../../styles/animation.module.css'; 
 import React, { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { auth } from '../../firebase/config';
+import styles from '../.././styles/3Good.module.css';
 
 const ThreeGoodDonePage = () => {
   const router = useRouter();
@@ -28,7 +27,7 @@ const ThreeGoodDonePage = () => {
     <div className={styles.container}>
       <h1>「いいこと」や「がんばったこと」が記録されました！</h1>
       <p>よくがんばりましたね。</p>
-      <WateringAnimation /> {/* WateringAnimation コンポーネントを表示 */}
+      
     </div>
   );
 };

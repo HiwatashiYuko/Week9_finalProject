@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date,ForeignKey
-from sql.setting import ENGINE,Base
-# from setting import ENGINE,Base
+# from sql.setting import ENGINE,Base
+from .setting import ENGINE,Base
 import sys
 from sqlalchemy.orm import relationship
 
@@ -9,6 +9,14 @@ from sqlalchemy.orm import relationship
 
 class User (Base):
     __tablename__ = "user"
+
+#      CREATE TABLE teamb.user (
+#     user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+#     user_name VARCHAR(50),
+#     firebase_uid VARCHAR(50),
+#     stripe_customer_id VARCHAR(50),
+#     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+#     );
 
     user_id = Column (Integer,primary_key=True, index=True)
     user_name = Column(String(50))
@@ -49,6 +57,14 @@ class Chat(Base):
 class ThreeGood(Base):
     __tablename__="threeGood"
 
+#  CREATE TABLE teamb.threeGood (
+#     threeGood_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+#     date DATE NOT NULL,
+#     good_thing_1 VARCHAR(50),
+#     good_thing_2 VARCHAR(50),
+#     good_thing_3 VARCHAR(50),
+#     user_id INT NOT NULL
+# );
     threegood_id = Column(Integer,primary_key=True)
     date = Column(Date)
     good1 = Column(String(100))
