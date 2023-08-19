@@ -25,14 +25,14 @@ const Signup = () => {
 
       // 決済Linkのウィンドウを開く　TODO：URLパラメータclient_reference_idにuser_idを渡す
       const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289?prefilled_email=${email}`;
-      window.open(stripePaymentLinkUrl, '_blank')
-
+      // window.open(stripePaymentLinkUrl, '_blank')
+      
       alert('会員登録が完了しました！');
        // 会員登録成功後に入力欄をリセット
        setEmail('');
        setPassword('');
        setUsername('');
-       router.push('/home');
+      router.push(stripePaymentLinkUrl);
     } catch (error) {
       console.error("会員登録エラー:", error);
       alert('会員登録に失敗しました。');
