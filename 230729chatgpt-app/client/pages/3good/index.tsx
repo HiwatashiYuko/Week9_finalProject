@@ -50,8 +50,8 @@ const ThreeGoodThings = () => {
       // user_id: 'user_id'
     };
   
-    console.log('送信するデータ:', data); 
-    console.log(formData.goodThings);
+    // console.log('送信するデータ:', data); 
+    // console.log(formData.goodThings);
     
     const response = await fetch('http://localhost:8000/api/3good', {
       method: 'POST',
@@ -62,7 +62,7 @@ const ThreeGoodThings = () => {
       mode: 'cors', // この行を追加
     });
   
-    console.log('レスポンス:', response);
+    // console.log('レスポンス:', response);
 
     if (!response.ok) {
       throw new Error('エラーが発生しました');
@@ -83,9 +83,12 @@ const ThreeGoodThings = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className="text-2xl m-3" style={{ color: '#f7a65e' }}>
+      <div className={styles.header}>
+        <h1 className="text-2xl m-3" style={{ color: '#f7a65e' }}>
         1日の中であった「いいこと」や「がんばったこと」を、<br />３つふりかえってみましょう
-      </h1>
+        </h1>
+        <img src="/images/795.png" alt="bouquet" className={styles.image} />
+      </div>
       <p>仕事のこと・勉強のこと・家事のこと、よかったことやがんばったことを思い出してみてください</p>
       <form onSubmit={handleSubmit}>
       <input
@@ -103,11 +106,15 @@ const ThreeGoodThings = () => {
             placeholder={`「いいこと」「がんばったこと」${index + 1}`}
             required
           />
+    
         ))}
        
-
-        <button type="submit">記録する</button>
+       <div className={styles.item}>
+        <button  className={styles.buttonStyle}type="submit">記録する</button>
+        <img src="/images/803.png" alt="Image3" className={styles.png} />
+        </div>
       </form>
+    
     </div>
   );
 };

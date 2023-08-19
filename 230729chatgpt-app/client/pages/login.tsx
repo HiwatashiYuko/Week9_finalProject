@@ -56,6 +56,7 @@ const Login = () => {
           <button className={styles.google_button} onClick={handleGoogleLogin}>Googleでログイン</button>
           <a className={styles.signup_button} href='/signup'>新規会員登録はこちらへ</a>
        </div>
+       <img src="/images/1195.png" alt="girl" className={styles.png} />
      </div>
   );
 };

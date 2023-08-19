@@ -119,17 +119,21 @@ async def record_good_things(request: Request, db: Session = Depends(get_db)):  
         return {"message": "goodThingsフィールドが存在しません"}
     
     # ThreeGoodThings オブジェクトを作成し、データベースに保存
-    # good_things_record = ThreeGoodThings(
-    #     user_id=user_id,
-    #     date=date,
-    #     good_thing_1=good_things[0],
-    #     good_thing_2=good_things[1],
-    #     good_thing_3=good_things[2],
-    # )
-    # db.add(good_things_record)
-    # db.commit()
-    # db.refresh(good_things_record)
-    return {"message": f"受け取った goodThings: {good_things}"}
+    good_things_record = ThreeGoodThings(
+        user_id=user_id,
+        date=date,
+        good_thing_1=good_things[0],
+        good_thing_2=good_things[1],
+        good_thing_3=good_things[2],
+    )
+    db.add(good_things_record)
+    db.commit()
+    db.refresh(good_things_record)
+
+     response_data = {
+        "message": f"受け取ったデータ: {data}"  # ここでレスポンスの内容を指定
+    }
+    return response_data
 
 # 最後にルーターを返す
 def get_router():

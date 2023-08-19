@@ -29,6 +29,7 @@
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .google_button {
@@ -38,6 +39,7 @@
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .signup_button {
@@ -47,6 +49,7 @@
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .header {
@@ -64,10 +67,15 @@
 }
 
 .image {
-  max-width: 15%; /* 変更 */
+  max-width: 10%; 
   height: auto;
 }
 
 .login_title {
   font-size: 1.5rem; 
+}
+
+.png {
+  max-width: 20%; 
+  height: auto;
 }

@@ -6,6 +6,7 @@
     font-style: normal;
     font-weight: 550;
     margin-left: 10rem;
+    margin-top: 5rem;
     color: dimgray;
   }
 
@@ -18,25 +19,34 @@
     width: 200%;
   }
 
-  .kurukuru {
-    background: linear-gradient(to right, #362ae0 0%,#3b79cc 50%,#42d3ed 100%);
-    width: 50px;
-    height: 50px;
-    opacity: 0;
-    padding-bottom: 40px;
+  .header {
+    display: flex;
+    align-items: center; 
+    background-color: rgba(255,255,255,0.4);
+    width: 55rem;
   }
-  .kurukuru.is-animated {
-    animation: kurukuru 1.4s ease-out;
-    opacity: 1;
+  
+  .image {
+    width: 20%; 
+    height: auto; 
+  
   }
-  @keyframes kurukuru {
-    0%{
-      transform: rotateY(0) translateY(40px);
-      opacity: 0;
-    }
-    100%{
-      transform: rotateY(360deg) translateY(0);
-      opacity: 1;
-    }
+
+  .buttonStyle {
+    background-color: #f4d6b8;
+    width: 7rem;
+    border-radius: 3px;
   }
-   
+
+  .item {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 20px; 
+  }  
+    
+  .png {
+    width: 100px; 
+  height: auto; 
+  margin-right: 10px; 
+  }
+  

@@ -1,6 +1,11 @@
 POST http://localhost:8000/api/3good
 
-{"data" : "TEST"}
-
+{
+  "threeGood_id": "threeGood_id",
+  "date": "2023-08-19",
+  "good_thing_1": "1",
+  "good_thing_2": "2",
+  "good_thing_3": "3"
+}
 ###
 GET http://localhost:8000/api/3good

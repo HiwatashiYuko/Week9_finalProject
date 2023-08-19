@@ -30,8 +30,10 @@ const Signup = () => {
         },
         body: JSON.stringify({
           userName: userName,
-          uid: user.uid
+          uid: user.uid,
+          mode: 'cors',
         })
+        
       });
 
       alert('会員登録が完了しました！');
@@ -107,24 +109,26 @@ const Signup = () => {
         <p>お試し期間の7日後に、有料期間がはじまります。(月額料金300円)</p>
       
         <h3 className={styles.color}>会員登録はこちらから</h3>
-        <input
+      
+        <input className={styles.inputField}
         type="text"
         value={userName} // ユーザー名の状態変数をvalueにセット
         onChange={(e) => setUserName(e.target.value)} // 状態変数を更新するハンドラ
         placeholder="ユーザー名"
       />
-      <input
+      <input className={styles.inputField}
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="メールアドレス"
       />
-      <input
+      <input className={styles.inputField}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="パスワード"
       />
+      
       <button className={styles.signup_button}onClick={handleSignup}>登録する</button>
       <button className={styles.google_button}onClick={handleGoogleLogin}>Googleアカウントで登録</button>
       </div>
