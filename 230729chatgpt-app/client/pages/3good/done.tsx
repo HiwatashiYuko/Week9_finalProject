@@ -77,4 +77,25 @@ const ThreeGoodDonePage = () => {
   );
 };
 
+// const container = document.querySelector('.container');
+// const kurukuru = document.querySelector('.kurukuru');
+
+// // 楕円の半径
+// const radiusX = container.clientWidth / 2;
+// const radiusY = container.clientHeight / 2;
+
+// // ランダムな角度を生成
+// const randomAngle = Math.random() * 2 * Math.PI;
+
+// // 楕円内のランダムな座標を計算
+// const x = radiusX * Math.cos(randomAngle);
+// const y = radiusY * Math.sin(randomAngle);
+
+// // .kurukuru 要素の位置を設定
+// kurukuru.style.left = `${radiusX + x}px`;
+// kurukuru.style.top = `${radiusY + y}px`;
+
+// // .kurukuru 要素にアニメーションクラスを追加
+// kurukuru.classList.add('is-animated');
+
 export default ThreeGoodDonePage;

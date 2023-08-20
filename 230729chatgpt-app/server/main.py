@@ -78,11 +78,11 @@
 # print("応答：", response)
 
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import firebase_admin
 import pymysql
 import stripe
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 from firebase_admin import credentials
 
@@ -99,15 +99,23 @@ app.include_router(api_router, prefix="/api")
 pymysql.install_as_MySQLdb()
 
 
-# CORSミドルウェアを追加
+# # CORSミドルウェアを追加
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # すべてのオリジンを許可
+#     allow_credentials=True,
+#     allow_methods=["*"],  # すべてのHTTPメソッドを許可
+#     allow_headers=["*"],  # すべてのヘッダーを許可
+# )
+
+origins = ["*"]  
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # すべてのオリジンを許可
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],  # すべてのHTTPメソッドを許可
-    allow_headers=["*"],  # すべてのヘッダーを許可
+    allow_headers=["*"],  # すべてのHTTPヘッダーを許可
 )
-
 
 
 

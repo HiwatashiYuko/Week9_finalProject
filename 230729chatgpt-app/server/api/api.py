@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from firebase_admin import auth
-from sqlalchemy.orm import Session
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import Session, relationship
 from models.models import User
 from models.models import ThreeGoodThings  
-from sql.database import SessionLocal
+from sql.database import Base, SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import openai
 from fastapi.responses import JSONResponse
@@ -32,25 +33,21 @@ def get_db():
 def get_user_id(id_token):
     decoded_token = auth.verify_id_token(id_token)
     return decoded_token['uid']
-
-# /signupエンドポイントの実装
-# @router.get("/signup")
-# async def get_firebase_uid(request_data: str):
-#     uid = 
-
     
 @router.post("/signup")
 async def signup(request: Request, db: Session = Depends(get_db)):
     data = await request.json()
     user_name = data.get("user_name")
-    id_token = data.get("id_token")
-    uid = get_user_id(id_token)
+    uid = data.get("uid")
+    
     # user_nameとuidを使用して、ユーザーを登録する処理を実行する
-    db_user = models.User(user_name=user_name, firebase_uid=uid)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
+    # db_user = models.User(user_name=user_name, firebase_uid=uid)
+    # db.add(db_user)
+    # db.commit()
+    # db.refresh(db_user)
+    print(data)
     return {"message": "User registered successfully."}
+        
 
 @router.get("/")
 async def root():
@@ -109,9 +106,8 @@ async def chat_endpoint(request: Request):
 async def record_good_things(request: Request, db: Session = Depends(get_db)):  # 引数を追加
     data = await request.json()  # JSONデータを取得
     print(data)
-    user_id = data.get("user_id")  # user_id を取得
     date = data.get("date")  # date を取得
-    good_things = data.get("good_thing_1")  # good_thing_1 を取得
+    good_things= data.get("good_thing_1")  # good_thing_1 を取得
     good_thing_2 = data.get("good_thing_2")  # good_thing_2 を取得
     good_thing_3 = data.get("good_thing_3")  # good_thing_3 を取得
 
@@ -120,7 +116,6 @@ async def record_good_things(request: Request, db: Session = Depends(get_db)):  
     
     # ThreeGoodThings オブジェクトを作成し、データベースに保存
     good_things_record = ThreeGoodThings(
-        user_id=user_id,
         date=date,
         good_thing_1=good_things[0],
         good_thing_2=good_things[1],
@@ -130,7 +125,7 @@ async def record_good_things(request: Request, db: Session = Depends(get_db)):  
     db.commit()
     db.refresh(good_things_record)
 
-     response_data = {
+    response_data = {
         "message": f"受け取ったデータ: {data}"  # ここでレスポンスの内容を指定
     }
     return response_data

@@ -17,11 +17,15 @@ const Signup = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // ユーザー名を表示名として設定
+  
+      const uid = user.uid;
+      console.log('uid:', uid);
+  
       await updateProfile(user, {
         displayName: userName
       });
+      
+      console.log('ユーザー名:', userName); 
 
       const response = await fetch('http://localhost:8000/api/signup', {
         method: 'POST',
@@ -29,25 +33,30 @@ const Signup = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          userName: userName,
+          user_name: userName,
           uid: user.uid,
           mode: 'cors',
         })
-        
       });
+      
+      console.log('レスポンス:', response);
 
       alert('会員登録が完了しました！');
-       // 会員登録成功後に入力欄をリセット
-       setEmail('');
-       setPassword('');
-       setUsername('');
-       router.push('/home');
+      const responseData = await response.json();
+      console.log('成功レスポンスデータ:', responseData);
+
+      // 会員登録成功後に入力欄をリセット
+      setEmail('');
+      setPassword('');
+      setUserName('');
+      router.push('/home');
     } catch (error) {
       console.error("会員登録エラー:", error);
       alert('会員登録に失敗しました。');
     }
   };
-
+  
+  
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -135,5 +144,6 @@ const Signup = () => {
     </div>
   )
 }
+
 
 export default Signup;

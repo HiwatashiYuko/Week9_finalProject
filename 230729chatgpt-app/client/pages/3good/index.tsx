@@ -34,15 +34,15 @@ const ThreeGoodThings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      threeGood_id: 'threeGood_id', 
+
       date: selectedDate.toISOString().substr(0, 10),
       goodThings: goodThings,
-      user_id: 'user_id',
+    
     };
 
   try {
     const data = {
-      threeGood_id: 'threeGood_id',
+      // threeGood_id: 'threeGood_id',
       date: formData.date,
       good_thing_1: formData.goodThings[0],
       good_thing_2: formData.goodThings[1],
@@ -50,19 +50,21 @@ const ThreeGoodThings = () => {
       // user_id: 'user_id'
     };
   
-    // console.log('送信するデータ:', data); 
-    // console.log(formData.goodThings);
+    console.log('送信するデータ:', data); 
+    console.log(formData.goodThings);
     
     const response = await fetch('http://localhost:8000/api/3good', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
-      mode: 'cors', // この行を追加
+      body: JSON.stringify({
+      data,
+      mode: 'cors',
+      }) // この行を追加
     });
   
-    // console.log('レスポンス:', response);
+    console.log('レスポンス:', response);
 
     if (!response.ok) {
       throw new Error('エラーが発生しました');
