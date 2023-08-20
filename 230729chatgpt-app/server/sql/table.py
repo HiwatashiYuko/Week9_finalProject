@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date,ForeignKey
 # from sql.setting import ENGINE,Base
-from setting import ENGINE,Base
+from .setting import ENGINE,Base
 import sys
 from sqlalchemy.orm import relationship
 
