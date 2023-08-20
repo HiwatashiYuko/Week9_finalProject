@@ -1,6 +1,10 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
+import os
+
+# DATABASE_URL = "mysql+pymysql://admin:password@db:3306/teamb"
+DATABASE_URL = "mysql+pymysql://admin:password@230729chatgpt-app-db-1:3308/teamb"
 
 Dialect = "mysql"
 driver = "pymysql"
@@ -9,7 +13,8 @@ password = "password"
 # host = "172.20.0.4"
 # host = "172.17.48.1"
 # host = "localhost"
-host = "db"
+# host = "db"
+host = "230729chatgpt-app-db-1"
 # port = "3308"
 port = "3306"
 database = "teamb"
@@ -18,6 +23,7 @@ db_url =  f"{Dialect}+{driver}://{username}:{password}@{host}:{port}/{database}?
 
 # DB接続するためのEngineインスタンス
 ENGINE = create_engine(db_url, echo=True)
+
 
 # DBに対してORM操作するときに利用
 # Sessionを通じて操作を行う

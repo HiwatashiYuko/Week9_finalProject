@@ -6,6 +6,7 @@
     font-style: normal;
     font-weight: 550;
     margin-left: 10rem;
+    margin-top: 5rem;
     color: dimgray;
   }
 
@@ -17,3 +18,35 @@
     margin: 2rem;
     width: 200%;
   }
+
+  .header {
+    display: flex;
+    align-items: center; 
+    background-color: rgba(255,255,255,0.4);
+    width: 55rem;
+  }
+  
+  .image {
+    width: 20%; 
+    height: auto; 
+  
+  }
+
+  .buttonStyle {
+    background-color: #f4d6b8;
+    width: 7rem;
+    border-radius: 3px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 20px; 
+  }  
+    
+  .png {
+    width: 100px; 
+  height: auto; 
+  margin-right: 10px; 
+  }
+  

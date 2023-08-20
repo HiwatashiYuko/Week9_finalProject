@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date,ForeignKey
-from sql.setting import ENGINE,Base
-# from setting import ENGINE,Base
+# from sql.setting import ENGINE,Base
+from setting import ENGINE,Base
 import sys
 from sqlalchemy.orm import relationship
 
@@ -46,10 +46,10 @@ class Chat(Base):
  
     user = relationship("User", back_populates="chat")
 
-class ThreeGood(Base):
+class ThreeGoodThings(Base):
     __tablename__="threeGood"
 
-    threegood_id = Column(Integer,primary_key=True)
+    threeGood_id = Column(Integer,primary_key=True)
     date = Column(Date)
     good1 = Column(String(100))
     good2 = Column(String(100))
@@ -93,3 +93,5 @@ def main(args):
 
 if __name__ == "__main__":
     main(sys.argv)
+
+
