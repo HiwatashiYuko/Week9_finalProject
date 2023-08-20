@@ -221,3 +221,16 @@ async def get_quote():
     random_quote = get_random_quote(session)    
     # レスポンスとしてJSONを返す
     return JSONResponse(content={"quote": random_quote})
+
+def get_user_info(uid):
+    user = session.query(User).filter_by(firebase_uid=uid).first()
+    return user
+
+@app.get('/users/{uid}')
+async def get_user_name(uid):
+    user_info = get_user_info(uid)
+    print(uid)
+    if user_info:
+        return JSONResponse(content={"user_name": user_info.user_name})
+    else:
+        return {"error": "User not found１"}
