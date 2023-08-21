@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from firebase_admin import auth
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import Session, relationship
-from models.models import User
-from models.models import ThreeGoodThings  
+# from models.models import User
+# from models.models import ThreeGoodThings  
 from sql.database import Base, SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import openai
