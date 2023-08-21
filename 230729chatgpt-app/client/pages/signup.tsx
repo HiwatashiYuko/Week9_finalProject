@@ -27,6 +27,10 @@ const Signup = () => {
       
       console.log('ユーザー名:', userName); 
 
+      // 決済Linkのウィンドウを開く　TODO：URLパラメータclient_reference_idにuser_idを渡す
+      const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289?prefilled_email=${email}`;
+      // window.open(stripePaymentLinkUrl, '_blank')
+      
       const response = await fetch('http://localhost:8000/api/signup', {
         method: 'POST',
         headers: {
@@ -49,7 +53,7 @@ const Signup = () => {
       setEmail('');
       setPassword('');
       setUserName('');
-      router.push('/home');
+      router.push(stripePaymentLinkUrl);
     } catch (error) {
       console.error("会員登録エラー:", error);
       alert('会員登録に失敗しました。');
@@ -63,9 +67,9 @@ const Signup = () => {
       await signInWithPopup(auth, provider);
       // ログインが成功した場合、次に遷移するページにリダイレクト
       const stripePaymentLinkUrl = `https://buy.stripe.com/test_00gdUkcZNfVIe7C289`;
-      window.open(stripePaymentLinkUrl, '_blank')
-
-      router.push('/home'); // Redirect to /home on successful Google login
+      
+      router.push(stripePaymentLinkUrl);
+      
       alert('会員登録が完了しました！');
     } catch (error) {
       alert('Googleログインに失敗しました。');
