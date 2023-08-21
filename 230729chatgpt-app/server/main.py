@@ -82,6 +82,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import firebase_admin
 import pymysql
+from fastapi.responses import JSONResponse
 import stripe
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 from firebase_admin import credentials
@@ -241,6 +242,8 @@ async def get_quote():
     random_quote = get_random_quote(session)    
     # レスポンスとしてJSONを返す
     return JSONResponse(content={"quote": random_quote})
+    # print("quote":"身の回りの小さな幸せに気づいてください")
+    # return JSONResponse(content={"quote":"身の回りの小さな幸せに気づいてください"})
 
 def get_user_info(uid):
     user = session.query(User).filter_by(firebase_uid=uid).first()
