@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+# from sql.setting import DATABASE_URL
 from sql.setting import DATABASE_URL
 from sqlalchemy.ext.declarative import declarative_base
 
