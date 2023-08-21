@@ -26,8 +26,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.27",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "postcss": "^8.4.27"
   }
 }

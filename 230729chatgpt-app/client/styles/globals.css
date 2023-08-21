@@ -11,5 +11,8 @@ body{
   background-size: cover;
   background-position: center;
   min-height: 100vh;
+  font-family: "Hannari";
+    font-style: normal;
+    font-weight: 550;
 }
 

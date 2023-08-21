@@ -78,30 +78,50 @@
 # print("応答：", response)
 
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
-
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
-
-from fastapi.responses import JSONResponse
+import firebase_admin
+import pymysql
 import stripe
+from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
+from firebase_admin import credentials
 
 from sqlalchemy.orm import Session
 from sql.setting import session
 from sql.table import User, Subscription, Payment, QuoteOfTheDay
 import random
 
+
 app = FastAPI()
+
+# Firebase Admin SDK初期化
+cred = credentials.Certificate("teamb-a39e7-firebase-adminsdk-mabvn-cdf66d7193.json")
+# firebase_admin.initialize_app(cred)
+default_app = firebase_admin.initialize_app(cred)
+print(default_app.name)  # "[DEFAULT]"
+
 app.include_router(api_router, prefix="/api")
 
-# CORSミドルウェアを追加
+pymysql.install_as_MySQLdb()
+
+
+# # CORSミドルウェアを追加
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # すべてのオリジンを許可
+#     allow_credentials=True,
+#     allow_methods=["*"],  # すべてのHTTPメソッドを許可
+#     allow_headers=["*"],  # すべてのヘッダーを許可
+# )
+
+origins = ["*"]  
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # すべてのオリジンを許可
+    allow_origins=origins,
+    allow_credentials=True,
     allow_methods=["*"],  # すべてのHTTPメソッドを許可
-    allow_headers=["*"],  # すべてのヘッダーを許可
+    allow_headers=["*"],  # すべてのHTTPヘッダーを許可
 )
-
 
 
 
