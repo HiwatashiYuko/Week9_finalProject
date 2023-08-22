@@ -82,9 +82,16 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import firebase_admin
 import pymysql
+from fastapi.responses import JSONResponse
 import stripe
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 from firebase_admin import credentials
+
+from sqlalchemy.orm import Session
+from sql.setting import session
+from sql.table import User, Subscription, Payment, QuoteOfTheDay
+import random
+
 
 app = FastAPI()
 
@@ -222,3 +229,31 @@ async def webhook(request: Request):
         print('Unhandled event type {}'.format(event['type']))
 
     return JSONResponse(content={'message': 'Success'}, status_code=200)
+
+
+def get_random_quote(session: Session):
+    quotes_count = session.query(QuoteOfTheDay).count()
+    random_offset = random.randint(0, quotes_count - 1)
+    random_quote = session.query(QuoteOfTheDay).offset(random_offset).first()
+    return random_quote.quotation if random_quote else "No quotes available"
+
+@app.get('/quotes')
+async def get_quote():
+    random_quote = get_random_quote(session)    
+    # レスポンスとしてJSONを返す
+    return JSONResponse(content={"quote": random_quote})
+    # print("quote":"身の回りの小さな幸せに気づいてください")
+    # return JSONResponse(content={"quote":"身の回りの小さな幸せに気づいてください"})
+
+def get_user_info(uid):
+    user = session.query(User).filter_by(firebase_uid=uid).first()
+    return user
+
+@app.get('/users/{uid}')
+async def get_user_name(uid):
+    user_info = get_user_info(uid)
+    print(uid)
+    if user_info:
+        return JSONResponse(content={"user_name": user_info.user_name})
+    else:
+        return {"error": "User not found１"}
