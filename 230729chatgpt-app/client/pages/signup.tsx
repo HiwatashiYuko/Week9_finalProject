@@ -77,7 +77,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className="font-kiwi">
       <div className={styles.header}>
       <h1 className={styles.title}><strong>CHEER ME</strong></h1>
       <img src="/images/632.png" alt="bouquet" className={styles.image} />

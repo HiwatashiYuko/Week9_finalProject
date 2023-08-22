@@ -24,8 +24,9 @@ module.exports = {
         }
       },
       fontFamily:{
-        yomogi: ['Yomogi'],
+        // yomogi: ['Yomogi'],
         ubuntu: ['Ubuntu'],
+        kiwi: ['kiwi maru'],
       },
     },
   },
