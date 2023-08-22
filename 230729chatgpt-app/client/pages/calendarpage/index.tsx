@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { auth } from '../../firebase/config';
+import MyCalendar from './date';
 
 const CalendarPage = () => {
   
@@ -23,23 +24,49 @@ const CalendarPage = () => {
     return () => unsubscribe();
   }, [auth, router]);
 
-  const handleDateChange = (e) => {
-    setSelectedDate(new Date(e.target.value));
+  const handleDateChange = (dateStr) => {
+    console.log(dateStr);
+    setSelectedDate(new Date(dateStr));
+    router.push(`/calendar/${dateStr}`);
   };
 
+  // const handleDateChange = (e) => {
+  // //   setSelectedDate(new Date(e.target.value));
+  // setSelectedDate(new Date(e.target.value));
+  // router.push(`/calendar/${e.target.value}`);
+  // };
+
+  const today = new Date();
+  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+
   return (
-    <div className={styles.container}>
-      <h1>がんばったこと、よかったこと記録をふりかえってみましょう</h1>
-      
-          <input 
-          type="date"
-          value={selectedDate.toISOString().substr(0, 10)} // YYYY-MM-DD 形式に変換
-          onChange={handleDateChange} // 日付が変更されたときに呼び出される関数を指定
-        />
-       
-      
+    <div className="container mx-auto px-4">
+        {/* {user_name && (
+        <h2 className="text-lg font-bold mb-2">{`${user_name}さんのページ`}</h2>
+      )} */}
+           <h1 className="text-2xl font-bold mb-4">がんばったこと、よかったこと記録をふりかえってみましょう</h1>
+           <div className="flex flex-wrap flex-row justify-between">
+        <div className="w-1/2">
+          {/* <MyCalendar initialDate={today} onDateSelect={handleDateChange} /> */}
+          <MyCalendar initialDate={new Date()} onDateSelect={handleDateChange} />
+        </div>
+        <div className="w-1/2 mt-4 md:mt-0 pl-4">
+          <div style={{ border: '2px solid #f7a65e', padding: '1rem', width: '100%', height: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
+          <p style={{ fontSize: '1.25rem' }}>今までにがんばってきたこと</p>
+            <p>選択された日付: {selectedDate.toLocaleDateString()}</p>
+            <ol>
+            <li style={{ color: '#333' }}>草むしりがんばった</li>
+            <li style={{ color: '#333' }}>運動を続けた</li>
+            <li style={{ color: '#333' }}>新しい料理を作ってみた</li>
+            </ol>
+          </div>
+        </div>
+      <img src="/images/765.jpg"  />
+      </div>
     </div>
   );
 };
+
+
 
 export default CalendarPage;
