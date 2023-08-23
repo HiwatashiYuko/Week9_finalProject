@@ -32,15 +32,17 @@
 
 // export default CalendarDatePage;
 
-
-import FullCalendar from '@fullcalendar/react';
+import FullCalendar, { FullCalendarProps } from '@fullcalendar/react';
+// import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+// import { Calendar, dayGridPlugin } from '@fullcalendar/core';
 
 
-export default function MyCalendar({ initialDate, onDateSelect }) {
-  const today = new Date();
-  const start = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-  const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+export default function MyCalendar({ initialDate, onDateSelect }: FullCalendarProps) {
+  const today = initialDate || new Date(); // initialDateが指定されていない場合は、今日の日付を使用する
+  const start = new Date(today.getFullYear(), today.getMonth() - 2, 1);
+  const end = new Date(today.getFullYear(), today.getMonth() + 3, 0);
 
   return (
     // <div>
@@ -53,17 +55,19 @@ export default function MyCalendar({ initialDate, onDateSelect }) {
     // </div>
     <div className="overflow-hidden" style={{ backgroundColor: 'white',height: '64vh'}}>
     <FullCalendar
-      plugins={[dayGridPlugin]}
-      initialView="dayGridMonth"
-      initialDate={initialDate}
-      validRange={{ start, end }}
-      contentHeight="auto"
-      dateClick={(info) => {
-        if (typeof onDateSelect === 'function') {
-          onDateSelect(info.dateStr);
-        }
-      }}
-    />
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        initialDate={today}
+        // validRange={{ start: '2023-01-01', end: '2023-12-31' }}
+        validRange={{ start: '2023/01/01', end: '2023/12/31' }}
+        contentHeight="auto"
+        dateClick={(info: any) => {
+          console.log('Date clicked: ' + info.dateStr);
+          if (onDateSelect) {
+            onDateSelect(info.dateStr);
+          }
+        }}
+      />
     </div>
   );
 }
