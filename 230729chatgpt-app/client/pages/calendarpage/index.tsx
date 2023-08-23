@@ -4,6 +4,24 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { auth } from '../../firebase/config';
 import MyCalendar from './date';
+// import Calendar from "react-calendar";
+// import moment from 'moment';
+
+const MyComponent = () => {
+  const date = new Date('2023-08-22');
+  // const date = new Date('2023/08/22');
+  const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  // const formattedDate = moment(selectedDate).format('YYYY/MM/DD');
+
+  return (
+    <div>
+      <p>日付: {formattedDate}</p>
+    </div>
+  );
+};
+
+
+
 
 const CalendarPage = () => {
   
@@ -36,37 +54,45 @@ const CalendarPage = () => {
   // router.push(`/calendar/${e.target.value}`);
   // };
 
+  // const CalendarWrapper = () => {
+  //   return (
+  //     <div>
+  //       <Calendar 
+  //           locale="ja-JP"
+  //        />
+  //     </div>
+  //   );
+  // };
+
+
+  
   const today = new Date();
-  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  // const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
 
   return (
     <div className="container mx-auto px-4">
-        {/* {user_name && (
-        <h2 className="text-lg font-bold mb-2">{`${user_name}さんのページ`}</h2>
-      )} */}
-           <h1 className="text-2xl font-bold mb-4">がんばったこと、よかったこと記録をふりかえってみましょう</h1>
-           <div className="flex flex-wrap flex-row justify-between">
+      <h1 className="text-2xl font-bold mb-4" style={{ marginTop: '5rem', fontFamily: 'Kiwi Maru, serif', backgroundColor: 'rgba(255, 255, 255, 0.5)', color: 'orange', fontSize: '20pt', padding: '2rem' }}>今までの自分ががんばったことの記録をふりかえってみましょう</h1>
+
+      <div className="flex flex-wrap flex-row justify-between">
         <div className="w-1/2">
-          {/* <MyCalendar initialDate={today} onDateSelect={handleDateChange} /> */}
-          <MyCalendar initialDate={new Date()} onDateSelect={handleDateChange} />
+          <MyCalendar initialDate={today} dateClick={handleDateChange} />
         </div>
         <div className="w-1/2 mt-4 md:mt-0 pl-4">
+          <p style={{ fontFamily: 'Kiwi Maru, serif', fontSize: '1.25rem' ,color:'#696969' }}>今までの「いいこと」や「がんばったこと」</p>
           <div style={{ border: '2px solid #f7a65e', padding: '1rem', width: '100%', height: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
-          <p style={{ fontSize: '1.25rem' }}>今までにがんばってきたこと</p>
-            <p>選択された日付: {selectedDate.toLocaleDateString()}</p>
+            <p>選択された日付: {selectedDate.toLocaleDateString('ja-JP')}</p>
             <ol>
-            <li style={{ color: '#333' }}>草むしりがんばった</li>
-            <li style={{ color: '#333' }}>運動を続けた</li>
-            <li style={{ color: '#333' }}>新しい料理を作ってみた</li>
+              <li style={{ fontFamily: 'Kiwi Maru, serif', color: '#333' }}>草むしりがんばった</li>
+              <li style={{ fontFamily: 'Kiwi Maru, serif', color: '#333' }}>子どもとしっかり遊んだ</li>
+              <li style={{ fontFamily: 'Kiwi Maru, serif', color: '#333' }}>暑い日でも料理を作った</li>
             </ol>
           </div>
+          <img src="/images/765.png" alt="present" width="200vh" height="200vh" style={{ backgroundColor:'rgba(255, 255, 255, 0.5)', marginTop: '10rem' }} />
+
         </div>
-      <img src="/images/765.jpg"  />
       </div>
     </div>
   );
 };
-
-
 
 export default CalendarPage;
