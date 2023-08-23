@@ -89,7 +89,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-green-510 sticky top-0">
+    <header className="bg-green-510 sticky top-0 z-1000">
       {headerContent}
     </header>
   );

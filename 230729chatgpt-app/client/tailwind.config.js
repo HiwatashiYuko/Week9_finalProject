@@ -27,6 +27,9 @@ module.exports = {
         yomogi: ['Yomogi'],
         ubuntu: ['Ubuntu'],
       },
+      zIndex: {
+        '1000': '1000',
+      }
     },
   },
   plugins: [],
