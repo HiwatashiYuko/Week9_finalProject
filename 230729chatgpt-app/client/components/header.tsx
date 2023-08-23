@@ -25,13 +25,13 @@ const Header = () => {
   // }
   
   let headerContent = null;
-  if (router.pathname !== '/login' && router.pathname !== '/signup') {
+  if (router.pathname !== '/login' && router.pathname !== '/signup' && router.pathname !== '/') {
     headerContent = (
       <>
         <h1 className="font-ubuntu font-bold text-6xl text-yellow-520 text-center">CHEER ME</h1>
-        <p className="font-yomogi mx-8">ようこそ、{userName}さん</p>
-        <p className="text-2xl font-yomogi text-center">{quote}</p>
-        <div className="flex justify-between m-3">
+        <p className="mx-8 font-kiwi">ようこそ、{userName}さん</p>
+        <p className="text-2xl text-center font-kiwi">{quote}</p>
+        <div className="flex justify-between m-3 font-kiwi">
           <div>
             <Link href="/home">ほめてもらう</Link>
           </div>

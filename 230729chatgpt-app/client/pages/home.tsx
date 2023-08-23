@@ -55,7 +55,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center font-kiwi">
       <h1 className="text-4xl m-6 text-yellow-520">今日のがんばりをほめてもらう！</h1>
       <p>仕事のこと・勉強のこと・家事のこと、がんばったことを思い出してみてください</p>
       <div>
