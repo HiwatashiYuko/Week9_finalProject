@@ -80,7 +80,7 @@
 # 3 Umechanさんのフロントとの連携を図るべく修正→処理部分を別ファイルへ転記。
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import firebase_admin
+# import firebase_admin
 import pymysql
 from fastapi.responses import JSONResponse
 import stripe
@@ -96,10 +96,10 @@ import random
 app = FastAPI()
 
 # Firebase Admin SDK初期化
-cred = credentials.Certificate("teamb-a39e7-firebase-adminsdk-mabvn-cdf66d7193.json")
+# cred = credentials.Certificate("teamb-a39e7-firebase-adminsdk-mabvn-cdf66d7193.json")
 # firebase_admin.initialize_app(cred)
-default_app = firebase_admin.initialize_app(cred)
-print(default_app.name)  # "[DEFAULT]"
+# default_app = firebase_admin.initialize_app(cred)
+# print(default_app.name)  # "[DEFAULT]"
 
 app.include_router(api_router, prefix="/api")
 
