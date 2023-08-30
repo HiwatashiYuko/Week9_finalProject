@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
-
+import { app } from './firebase/config'; 
 
 const Header = () => {
   const router = useRouter();
