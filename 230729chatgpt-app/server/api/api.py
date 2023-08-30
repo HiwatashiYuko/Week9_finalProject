@@ -11,6 +11,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ValidationError
 from sql import database
 # import models
+from .config import API_TOKEN
 
 router = APIRouter()
 
@@ -59,7 +60,7 @@ async def health_check():
 
 @router.get("/chat")
 async def chat_with_gpt3(request_data: str):
-    api_token = "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"  # OpenAIのAPIトークンを設定してください
+    api_token = API_TOKEN  # OpenAIのAPIトークンを設定してください
 
     # GPT-3.5 Turboモデルに対話を依頼
     client = openai.ChatCompletion.create(

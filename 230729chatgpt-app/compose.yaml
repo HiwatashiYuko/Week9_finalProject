@@ -11,12 +11,6 @@ services:
     command: sh -c "npm run dev"
     ports:
       - "3000:3000"
-    environment:
-      NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyCGdAi5FXel-DTsNGFbvT2Tr-RZowG94cw
-      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: teamb-a39e7.firebaseapp.com
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: teamb-a39e7
-      # NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: [Stripeのパブリッシャブルキー]
-
     networks:
       - app-network
 

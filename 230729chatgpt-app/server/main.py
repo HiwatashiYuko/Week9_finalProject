@@ -86,7 +86,7 @@ from fastapi.responses import JSONResponse
 import stripe
 from api.api import router as api_router    #.api.apiではエラーが出たので、api.apiに変更した。
 from firebase_admin import credentials
-
+from api.config import STRIPE_API_KEY, STRIPE_ENDPOINT_SECRET
 from sqlalchemy.orm import Session
 from sql.setting import session
 from sql.table import User, Subscription, Payment, QuoteOfTheDay
@@ -128,10 +128,10 @@ app.add_middleware(
 
 
 
-stripe.api_key = 'sk_test_51NcIHqILFuiHCcLQPIMyGAHMF55bwNPZacJEMkZOnQgIns1gsP7Cb5QQIlcX6zuqmKPZiSZcFPFOoTxZeF7Wptcx00UwshPAWS'
+stripe.api_key = STRIPE_API_KEY
 
 # This is your Stripe CLI webhook secret for testing your endpoint locally.
-endpoint_secret = 'whsec_adf2e988827e9ffdac29330253ee0cb76cd992af2f22742f0b496a9a55e8cccc'
+endpoint_secret = STRIPE_ENDPOINT_SECRET
 
 def update_stripe_customer_id(client_reference_id, customer_id):
     # client_reference_id が user_id と一致するユーザーを検索
