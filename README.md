@@ -30,8 +30,12 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【説明資料】
 
-[発表資料_CHEERME紹介資料.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12640050/_CHEERME.pdf)
-
+<object data='"C:\Users\sarap\Week9_finalProject\CHEER ME API設計.pdf"' 
+        type='application/pdf' 
+        width='100%' 
+        height='100%'>
+<p>This browser does not support inline PDFs. Please download the PDF to view it: <a href=""C:\Users\sarap\Week9_finalProject\CHEER ME API設計.pdf"">Download PDF</a></p>
+</object>
 
 ### 【要件定義】
 
