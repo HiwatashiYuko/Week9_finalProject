@@ -30,9 +30,10 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【説明資料】
 
-<object data="./発表資料_CHEERME紹介資料" type="application/pdf" width="100%" height="100%">
-    <p>PDFを表示するには、<a href="./発表資料_CHEERME紹介資料">ここをクリック</a>してください。</p>
+<object data="./%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99_CHEERME%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99.pdf" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99_CHEERME%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99.pdf">ここをクリック</a>してください。</p>
 </object>
+
 
 ### 【要件定義】
 
