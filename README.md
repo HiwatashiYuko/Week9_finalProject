@@ -30,8 +30,8 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【説明資料】
 
-<object data="./CHEER ME API設計.pdf" type="application/pdf" width="100%" height="100%">
-    <p>PDFを表示するには、<a href="./CHEER ME API設計.pdf">ここをクリック</a>してください。</p>
+<object data="./発表資料_CHEERME紹介資料" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./発表資料_CHEERME紹介資料">ここをクリック</a>してください。</p>
 </object>
 
 ### 【要件定義】
@@ -66,11 +66,15 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【API設計】
 
-[CHEER ME API設計.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12640053/CHEER.ME.API.pdf)
+<object data="./CHEER ME API設計.pdf" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./CHEER ME API設計.pdf">ここをクリック</a>してください。</p>
+</object>
 
 ### 【デザイン】
 
-[CHEER ME デザイン.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12617735/CHEER.ME.pdf)
+<object data="./CHEER ME デザイン" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./CHEER ME デザイン">ここをクリック</a>してください。</p>
+</object>
 
 ### 【PRD】
 
