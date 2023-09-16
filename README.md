@@ -73,8 +73,8 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【デザイン】
 
-<object data="./CHEER ME デザイン" type="application/pdf" width="100%" height="100%">
-    <p>PDFを表示するには、<a href="./CHEER ME デザイン">ここをクリック</a>してください。</p>
+<object data="./CHEER%20ME%20デザイン.pdf" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./CHEER%20ME%20デザイン.pdf">ここをクリック</a>してください。</p>
 </object>
 
 ### 【PRD】
