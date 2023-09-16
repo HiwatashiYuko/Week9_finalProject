@@ -29,9 +29,8 @@ web サーバー：uvicorn0.23
 https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee04-4513-bfe9-5721c594dd93
 
 ### 【説明資料】
-[![alt属性](画像ファイルパス)](URL)
-[![スライド1](https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/c95044ab-c99a-48d8-9b85-9e7407141966)]()
 
+[発表資料_CHEERME紹介資料.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12640050/_CHEERME.pdf)
 
 
 ### 【要件定義】
@@ -66,7 +65,7 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【API設計】
 
-[CHEER ME API設計.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12617733/CHEER.ME.API.pdf)
+[CHEER ME API設計.pdf](https://github.com/HiwatashiYuko/Week9_finalProject/files/12640053/CHEER.ME.API.pdf)
 
 ### 【デザイン】
 
