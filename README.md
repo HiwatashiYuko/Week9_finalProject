@@ -26,7 +26,7 @@ web サーバー：uvicorn0.23
 
 ### 【デモ動画】
 
-https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee04-4513-bfe9-5721c594dd93
+https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/bb472d17-b02d-4d32-81a2-1b5dab5a87f0
 
 ### 【説明資料】
 
@@ -63,7 +63,7 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【ER図】
 
-![drawSQL-forimpostersyndrome-export-2023-09-15](https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/6bfdf7be-d773-4ca8-a38a-ff78023292eb)
+![drawSQL-forimpostersyndrome-export-2023-09-15](https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/f8212b5f-a86f-4410-ad9a-91a005c74db7)
 
 ### 【API設計】
 
@@ -73,8 +73,8 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/110ddf28-ee
 
 ### 【デザイン】
 
-<object data="./CHEER ME デザイン" type="application/pdf" width="100%" height="100%">
-    <p>PDFを表示するには、<a href="./CHEER ME デザイン">ここをクリック</a>してください。</p>
+<object data="./CHEER%20ME%20デザイン.pdf" type="application/pdf" width="100%" height="100%">
+    <p>PDFを表示するには、<a href="./CHEER%20ME%20デザイン.pdf">ここをクリック</a>してください。</p>
 </object>
 
 ### 【PRD】
@@ -122,6 +122,5 @@ Yuko（リーダー） / Ako / Umechan / Wakayo
 
 9. **競合分析/Competitive Analysis**  
 LLMを搭載したアプリケーションは存在するが、「インポスター症候群」の対処としてのアプリケーションは、現時点では存在しないため、優位性があると考える。
-
 
 
