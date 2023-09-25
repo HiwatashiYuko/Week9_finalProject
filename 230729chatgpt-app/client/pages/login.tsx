@@ -2,7 +2,7 @@
 
 // login.tsx
 import React, { useState } from 'react';
-import { app, auth } from '../firebase/config'; 
+import { app, auth } from '../.env.local/firebase/config'; 
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 // import firebaseConfig from '../firebase/config'; 
 import { useRouter } from 'next/router'; 

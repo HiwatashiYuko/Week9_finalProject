@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { auth } from '../../firebase/config';
+import { auth } from '../../.env.local/firebase/config';
 import styles from '../.././styles/3Good.module.css';
 
 const ThreeGoodThings = () => {
