@@ -26,7 +26,7 @@ web サーバー：uvicorn0.23
 
 ### 【デモ動画】
 
-https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/bb472d17-b02d-4d32-81a2-1b5dab5a87f0
+https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/7bf68713-76b9-442c-bccd-07d8b8fb5d59
 
 ### 【説明資料】
 
