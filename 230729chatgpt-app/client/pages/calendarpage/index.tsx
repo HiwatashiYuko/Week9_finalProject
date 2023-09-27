@@ -2,7 +2,7 @@ import styles from '../../styles/Calendar.module.css';
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { auth } from '../../firebase/config';
+import { auth } from '../../.env.local/firebase/config';
 import MyCalendar from './date';
 // import Calendar from "react-calendar";
 // import moment from 'moment';

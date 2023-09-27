@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
-import { app } from '../firebase/config';
+import { app } from '../.env.local/firebase/config';
 import styles from '../styles/Signup.module.css';
 import { useRouter } from 'next/router';
 // import axios from 'axios';
