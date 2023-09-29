@@ -79,7 +79,8 @@ https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/7bf68713-76
 
 ### 【PRD】
 
-"C:\Users\sarap\Week9_finalProject\230729chatgpt-app\PRD.md"#ハイパーリンク
+[PRDへのリンク](PRD.md)
+
 
 
 
