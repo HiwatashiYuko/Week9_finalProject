@@ -24,6 +24,10 @@ web サーバー：uvicorn0.23
 
 ### 【開発期間】2023年7月24日～8月25日
 
+### 【BC3期生卒業成果発表会「STAGE」動画】8月25日
+
+https://www.youtube.com/watch?v=K2csUscIT4w
+
 ### 【デモ動画】
 
 https://github.com/HiwatashiYuko/Week9_finalProject/assets/122708536/0e20fdfe-d5d2-4186-939c-0d05e966050c
