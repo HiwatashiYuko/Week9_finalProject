@@ -26,6 +26,8 @@ web サーバー：uvicorn0.23
 
 ### 【BC3期生卒業成果発表会「STAGE」動画】8月25日
 
+※発表は、28分40秒以降です。
+
 https://www.youtube.com/watch?v=K2csUscIT4w
 
 ### 【デモ動画】
